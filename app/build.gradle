@@ -1,0 +1,78 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "24.0.2"
+
+
+    signingConfigs {
+        liaoqiubarelease {
+            storeFile file('zlc.jks')
+            keyAlias 'liaoqiubaAPP'
+            keyPassword 'liaoqiubaAPPQwer1234'
+            storePassword 'liaoqiubaQwer1234'
+        }
+        debug {
+            storeFile file("zlc.jks")
+            keyAlias "liaoqiubaAPP"
+            keyPassword "liaoqiubaAPPQwer1234"
+            storePassword "liaoqiubaQwer1234"
+        }
+    }
+    defaultConfig {
+        applicationId "com.sero.chaoshengbo"
+        minSdkVersion 14
+        targetSdkVersion 23
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            debuggable true
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.liaoqiubarelease
+            buildConfigField "boolean", "Logable", "false"
+            buildConfigField "int", "buildType", "0"
+        }
+        debug {
+            debuggable true
+            buildConfigField "boolean", "Logable", "true"
+            buildConfigField "int", "buildType", "1"
+        }
+    }
+    productFlavors {
+        chaoshengbo {}
+        _360 {}
+        xiaomi {}
+        productFlavors.all {
+            flavor -> flavor.manifestPlaceholders = [UMENGCHANNEL: name]
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    compile 'com.android.support:appcompat-v7:23.4.0'
+    compile 'com.android.support:design:23.4.0'
+    compile 'com.android.support:support-v4:23.4.0'
+    compile 'com.android.support:support-v13:23.4.0'
+    testCompile 'junit:junit:4.12'
+
+    compile 'com.jakewharton:butterknife:7.0.1' //  databind
+    compile 'io.reactivex:rxandroid:1.2.1'
+    compile 'io.reactivex:rxjava:1.1.6'
+    compile 'com.squareup.retrofit2:retrofit:2.1.0'//retrofit
+    compile 'com.squareup.retrofit2:converter-gson:2.1.0'
+    compile 'com.squareup.retrofit2:adapter-rxjava:2.0.0'
+
+    compile 'com.squareup.okhttp3:logging-interceptor:3.3.1'
+
+
+    compile 'com.github.bumptech.glide:glide:3.7.0'//图片加载
+
+}

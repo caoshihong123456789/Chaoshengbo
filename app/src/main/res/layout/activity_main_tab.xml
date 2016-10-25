@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/com.sero.chaoshengbo"
+    xmlns:app1="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main_tab"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.sero.chaoshengbo.activity.MainTabActivity">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/maintab_tablayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        app1:elevation="12dp">
+        <!--tabMode 设置如果tab数量过多超出屏幕，可以滑动
+                app:tabGravity设置值center，在有些情况下，比如TabLayout中子view较少需要居中显示时候的情景-->
+        <android.support.design.widget.TabLayout
+            android:id="@android:id/tabs"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@color/tabBackground"
+            app1:tabIndicatorHeight="0dp"
+            app1:tabSelectedTextColor="@color/colorPrimaryDark"
+            app1:tabTextColor="@color/tabtextColor"
+            app:Gravity="fill"
+            app:tabMode="scrollable" />
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/maintab_viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/maintab_tablayout">
+
+    </android.support.v4.view.ViewPager>
+
+
+</RelativeLayout>

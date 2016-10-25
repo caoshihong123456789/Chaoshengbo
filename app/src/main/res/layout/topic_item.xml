@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@color/white_bg"
+    android:id="@+id/tipic_layout"
+    android:layout_marginBottom="4dp">
+
+    <ImageView
+        android:id="@+id/topic_item_img"
+        android:layout_width="match_parent"
+        android:layout_height="168dp"
+        android:scaleType="fitXY"
+        android:background="@color/colorAccent"/>
+    <TextView
+        android:id="@+id/topic_item_title"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="18dp"
+        android:singleLine="true"
+        android:ellipsize="end"
+        android:textSize="15dp"
+        android:layout_marginLeft="11dp"
+        android:textColor="@color/textColor3"
+        android:layout_marginBottom="10dp"
+        android:layout_marginRight="11dp"
+        android:text="陪你看球皇家马德里特刊"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/topic_item_desc"
+        android:layout_marginLeft="11dp"
+        android:textSize="13dp"
+        android:singleLine="true"
+        android:ellipsize="end"
+        android:textColor="@color/textColor9"
+        android:layout_marginRight="11dp"
+        android:layout_width="wrap_content"
+        android:layout_marginBottom="18dp"
+        android:text="皇家马德里是一家位于西班牙首都马德里的足球俱乐部"
+        android:layout_height="wrap_content" />
+</LinearLayout>
