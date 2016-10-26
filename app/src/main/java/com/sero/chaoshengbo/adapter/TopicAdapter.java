@@ -14,7 +14,7 @@ import com.bumptech.glide.Glide;
 import com.sero.chaoshengbo.R;
 import com.sero.chaoshengbo.activity.BaseActivity;
 import com.sero.chaoshengbo.model.TopicModel;
-import com.sero.chaoshengbo.module.TopDetailActivity;
+import com.sero.chaoshengbo.module.TopicDetailActivity;
 
 import java.util.List;
 
@@ -65,7 +65,7 @@ public class TopicAdapter extends RecyclerView.Adapter {
                 }).subscribe(new Action1<String>() {
                     @Override
                     public void call(String s) {
-                        BaseActivity.gotoActivity(context, TopDetailActivity.class, s);
+                        BaseActivity.gotoActivity(context, TopicDetailActivity.class, s);
                     }
                 });
             }
@@ -91,7 +91,7 @@ public class TopicAdapter extends RecyclerView.Adapter {
         }).subscribe(new Action1<String>() {
             @Override
             public void call(String s) {
-                BaseActivity.gotoActivity(context, TopDetailActivity.class,s);
+                BaseActivity.gotoActivity(context, TopicDetailActivity.class,s);
             }
         });*//*
 

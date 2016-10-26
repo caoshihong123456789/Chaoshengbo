@@ -15,7 +15,8 @@ import com.sero.chaoshengbo.NetUtil.NetUtil;
 import com.sero.chaoshengbo.R;
 import com.sero.chaoshengbo.adapter.TopicAdapter;
 import com.sero.chaoshengbo.javabean.BaseResponseBean;
-import com.sero.chaoshengbo.javabean.TopicBean;
+import com.sero.chaoshengbo.javabean.TopicDetailBean;
+import com.sero.chaoshengbo.model.TopicModel;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -66,9 +67,9 @@ public class TopicActivity extends BaseFragment {
         NetUtil.GetApi().TopIcGetData(BaseApi.user_id, 20, 0)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new BaseSubscriber<BaseResponseBean<TopicBean>>(getActivity()) {
+                .subscribe(new BaseSubscriber<BaseResponseBean<TopicDetailBean<TopicModel>>>(getActivity()) {
                     @Override
-                    public void onNext(BaseResponseBean<TopicBean> topicBeanBaseResponseBean) {
+                    public void onNext(BaseResponseBean<TopicDetailBean<TopicModel>> topicBeanBaseResponseBean) {
                         super.onNext(topicBeanBaseResponseBean);
                         adapter.setData(topicBeanBaseResponseBean.getData().getList());
 

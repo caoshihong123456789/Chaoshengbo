@@ -1,5 +1,7 @@
 package com.sero.chaoshengbo.javabean;
 
+import com.sero.chaoshengbo.model.TopicModel;
+
 import java.util.List;
 
 /**
@@ -8,10 +10,9 @@ import java.util.List;
  * 返回值中data 中的数据
  */
 
-public class TopicDetailBean<T> {
+public class TopicDetailBean<T> extends TopicModel{
 
     private int count;
-//    private List<TopicDetailModel> topicDetailModelList;
     private List<T> list;
 
     public int getCount() {

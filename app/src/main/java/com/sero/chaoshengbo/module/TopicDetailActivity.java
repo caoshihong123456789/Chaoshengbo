@@ -9,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.sero.chaoshengbo.NetUtil.BaseApi;
 import com.sero.chaoshengbo.NetUtil.BaseSubscriber;
 import com.sero.chaoshengbo.NetUtil.NetUtil;
@@ -24,21 +25,24 @@ import butterknife.ButterKnife;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
-public class TopDetailActivity extends BaseActivity {
+public class TopicDetailActivity extends BaseActivity {
 
 
-    @Bind(R.id.title_bar_title)
-    TextView titleBarTitle;
-    @Bind(R.id.title_bar_menu)
-    ImageView titleBarMenu;
-    @Bind(R.id.title_bar_layout)
-    Toolbar titleBarLayout;
+    @Bind(R.id.topicDetail_colltoobar_bg)
+    ImageView topicDetailColltoobarBg;
+    @Bind(R.id.topicDetail_colltoobar_title)
+    TextView topicDetailColltoobarTitle;
+    @Bind(R.id.topicDetail_colltoobar_menu)
+    ImageView topicDetailColltoobarMenu;
+    @Bind(R.id.topicDetail_colltoobar_layout)
+    Toolbar topicDetailColltoobarLayout;
     @Bind(R.id.topicDetail_colltoobar)
     CollapsingToolbarLayout topicDetailColltoobar;
     @Bind(R.id.topicDetail_listview)
     RecyclerView topicDetailListview;
     @Bind(R.id.activity_top_detail)
     CoordinatorLayout activityTopDetail;
+
     private String topicDetailId;
     private TopicDetailAdapter adapter;
 
@@ -52,14 +56,13 @@ public class TopDetailActivity extends BaseActivity {
     }
 
     private void initView() {
-        titleBarTitle.setText("专题详情");
 
 
         //给页面设置工具栏
-        setSupportActionBar(titleBarLayout);
+        setSupportActionBar(topicDetailColltoobarLayout);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);//返回键
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-        titleBarMenu.setImageResource(R.mipmap.mores);
+        topicDetailColltoobarMenu.setImageResource(R.mipmap.mores);
 
         //设置工具栏标题
 //        topicDetailColltoobar.setTitle("cheeseName");
@@ -83,6 +86,8 @@ public class TopDetailActivity extends BaseActivity {
                     public void onNext(BaseResponseBean<TopicDetailBean<TopicDetailModel>> topicDetailBeanBaseResponseBean) {
                         super.onNext(topicDetailBeanBaseResponseBean);
                         adapter.setList(topicDetailBeanBaseResponseBean.getData().getList());
+                        topicDetailColltoobarTitle.setText(topicDetailBeanBaseResponseBean.getData().getName());
+                        Glide.with(TopicDetailActivity.this).load(topicDetailBeanBaseResponseBean.getData().getImg_small()).into(topicDetailColltoobarBg);
                     }
 
                     @Override

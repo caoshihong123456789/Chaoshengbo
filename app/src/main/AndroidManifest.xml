@@ -22,7 +22,7 @@
         </activity>
         <!-- <meta-data android:name="UMENGCHANNEL">chaoshengbo</meta-data> -->
         <activity
-            android:name=".module.TopDetailActivity"
+            android:name=".module.TopicDetailActivity"
             android:theme="@style/AppTheme1">
 
         </activity>

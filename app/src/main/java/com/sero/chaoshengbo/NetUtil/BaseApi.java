@@ -1,9 +1,9 @@
 package com.sero.chaoshengbo.NetUtil;
 
 import com.sero.chaoshengbo.javabean.BaseResponseBean;
-import com.sero.chaoshengbo.javabean.TopicBean;
 import com.sero.chaoshengbo.javabean.TopicDetailBean;
 import com.sero.chaoshengbo.model.TopicDetailModel;
+import com.sero.chaoshengbo.model.TopicModel;
 
 import retrofit2.http.GET;
 import retrofit2.http.Query;
@@ -22,7 +22,7 @@ public interface BaseApi {
 
     /**获取专题页数据的方法*/
     @GET(GetString.TOPIC_URL)
-    Observable<BaseResponseBean<TopicBean>> TopIcGetData(
+    Observable<BaseResponseBean<TopicDetailBean<TopicModel>>> TopIcGetData(
             @Query("user_id") String user_id,
             @Query("psize") int psize,
             @Query("pindex") int pindex);

@@ -15,25 +15,26 @@
         android:layout_height="270dp"
         android:fitsSystemWindows="true"
         android:clipToPadding="false"
-        app:contentScrim="@color/colorPrimaryDark"
-        app:expandedTitleMarginStart="48dp"
+        app:layout_collapseParallaxMultiplier="0.7"
         app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
         <ImageView
+            android:id="@+id/topicDetail_colltoobar_bg"
             android:layout_width="match_parent"
-            android:layout_height="270dp"
-            android:background="@mipmap/ic_launcher" />
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"
+            android:background="@color/colorAccent"/>
 
         <android.support.v7.widget.Toolbar
-            android:id="@+id/title_bar_layout"
+            android:id="@+id/topicDetail_colltoobar_layout"
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:orientation="vertical"
             app:layout_collapseMode="pin"
-            >
+           >
 
             <TextView
-                android:id="@+id/title_bar_title"
+                android:id="@+id/topicDetail_colltoobar_title"
                 tools:text="标题"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -42,7 +43,7 @@
                 android:textSize="14sp" />
 
             <ImageView
-                android:id="@+id/title_bar_menu"
+                android:id="@+id/topicDetail_colltoobar_menu"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_gravity="center_vertical|right"
