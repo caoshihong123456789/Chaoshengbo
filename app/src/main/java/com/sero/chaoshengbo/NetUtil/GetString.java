@@ -30,6 +30,7 @@ public class GetString {
 
     public static final String TOPIC_URL="/chat/index/features";//专题url
     public static final String TOPIC_DETAIL_URL="/chat/index/featurecontents";//专题详情url
+    public static final String HomeActivity_URL="/chat/index/indexrecommend";//首页咨询与推荐
 
 
 }

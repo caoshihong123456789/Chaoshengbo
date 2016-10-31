@@ -18,7 +18,6 @@ public class NetUtil {
 
     private static Retrofit retrofit = null;
     private static BaseApi baseApi = null;
-//    private static OkHttpClient okHttpClient = new OkHttpClient();
     private static OkHttpClient okHttpClient=new OkHttpClient.Builder().addInterceptor(new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)).build();
     private static Converter.Factory gsonFactory= GsonConverterFactory.create();
     private static CallAdapter.Factory rxJavaAdapterFactory= RxJavaCallAdapterFactory.create();

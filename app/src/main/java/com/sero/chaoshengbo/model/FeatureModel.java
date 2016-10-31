@@ -5,9 +5,9 @@ import java.io.Serializable;
 /**
  * Created by caoshihong on 2016/5/25.
  *
- * 专题列表页的bean
+ * 专题列表页的bean  feature_meta
  */
-public class TopicModel implements Serializable {
+public class FeatureModel implements Serializable {
     //专题id
     private int id;
     //专题名

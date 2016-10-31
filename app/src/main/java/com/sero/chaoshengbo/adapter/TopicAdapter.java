@@ -13,7 +13,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.sero.chaoshengbo.R;
 import com.sero.chaoshengbo.activity.BaseActivity;
-import com.sero.chaoshengbo.model.TopicModel;
+import com.sero.chaoshengbo.model.FeatureModel;
 import com.sero.chaoshengbo.module.TopicDetailActivity;
 
 import java.util.List;
@@ -31,7 +31,7 @@ import rx.functions.Func1;
 public class TopicAdapter extends RecyclerView.Adapter {
 
 
-    private List<TopicModel> list;
+    private List<FeatureModel> list;
     private Context context;
 
     @Override
@@ -72,7 +72,7 @@ public class TopicAdapter extends RecyclerView.Adapter {
         });
     }
 
-    public void setData(List<TopicModel> list) {
+    public void setData(List<FeatureModel> list) {
         this.list = list;
         notifyDataSetChanged();
     }

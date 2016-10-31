@@ -48,7 +48,7 @@ public class TopicDetailAdapter extends RecyclerView.Adapter {
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        ViewHolder mHolder=(ViewHolder)holder;
+        final ViewHolder mHolder=(ViewHolder)holder;
         Glide.with(holder.itemView.getContext()).load(list.get(position).getImg()).into(mHolder.topicdetailItemImage);
         mHolder.topicdetailItemTitle.setText(list.get(position).getTitle());
         mHolder.topicdetailItemTime.setText(list.get(position).getReleasedatetime());

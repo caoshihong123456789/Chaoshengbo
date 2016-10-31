@@ -1,9 +1,10 @@
 package com.sero.chaoshengbo.NetUtil;
 
 import com.sero.chaoshengbo.javabean.BaseResponseBean;
-import com.sero.chaoshengbo.javabean.TopicDetailBean;
+import com.sero.chaoshengbo.javabean.FeatureDetailBean;
+import com.sero.chaoshengbo.javabean.HomeActivityBean;
 import com.sero.chaoshengbo.model.TopicDetailModel;
-import com.sero.chaoshengbo.model.TopicModel;
+import com.sero.chaoshengbo.model.FeatureModel;
 
 import retrofit2.http.GET;
 import retrofit2.http.Query;
@@ -22,19 +23,25 @@ public interface BaseApi {
 
     /**获取专题页数据的方法*/
     @GET(GetString.TOPIC_URL)
-    Observable<BaseResponseBean<TopicDetailBean<TopicModel>>> TopIcGetData(
+    Observable<BaseResponseBean<FeatureDetailBean<FeatureModel>>> TopIcGetData(
             @Query("user_id") String user_id,
             @Query("psize") int psize,
             @Query("pindex") int pindex);
 
     /**专题详情页获取数据的方法*/
     @GET(GetString.TOPIC_DETAIL_URL)
-    Observable<BaseResponseBean<TopicDetailBean<TopicDetailModel>>> TopIcDetailGetData(
+    Observable<BaseResponseBean<FeatureDetailBean<TopicDetailModel>>> TopIcDetailGetData(
             @Query("user_id") String user_id,
             @Query("fid") String fid,
             @Query("psize") int psize,
             @Query("pindex") int pindex
     );
 
+    /**获得首页咨询与推荐*/
+    Observable<BaseResponseBean<HomeActivityBean>> HomeActivityGetData(
+            @Query("user_id") String user_id,
+            @Query("psize") int psize,
+            @Query("pindex") int pindex
+    );
 
 }

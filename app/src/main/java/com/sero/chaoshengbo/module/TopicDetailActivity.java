@@ -1,6 +1,10 @@
 package com.sero.chaoshengbo.module;
 
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,14 +14,17 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.SimpleTarget;
 import com.sero.chaoshengbo.NetUtil.BaseApi;
 import com.sero.chaoshengbo.NetUtil.BaseSubscriber;
 import com.sero.chaoshengbo.NetUtil.NetUtil;
 import com.sero.chaoshengbo.R;
+import com.sero.chaoshengbo.Util.BitmapBlurUtil;
 import com.sero.chaoshengbo.activity.BaseActivity;
 import com.sero.chaoshengbo.adapter.TopicDetailAdapter;
 import com.sero.chaoshengbo.javabean.BaseResponseBean;
-import com.sero.chaoshengbo.javabean.TopicDetailBean;
+import com.sero.chaoshengbo.javabean.FeatureDetailBean;
 import com.sero.chaoshengbo.model.TopicDetailModel;
 
 import butterknife.Bind;
@@ -81,13 +88,28 @@ public class TopicDetailActivity extends BaseActivity {
         NetUtil.GetApi().TopIcDetailGetData(BaseApi.user_id, topicDetailId, 10, 0)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new BaseSubscriber<BaseResponseBean<TopicDetailBean<TopicDetailModel>>>(this) {
+                .subscribe(new BaseSubscriber<BaseResponseBean<FeatureDetailBean<TopicDetailModel>>>(this) {
                     @Override
-                    public void onNext(BaseResponseBean<TopicDetailBean<TopicDetailModel>> topicDetailBeanBaseResponseBean) {
+                    public void onNext(BaseResponseBean<FeatureDetailBean<TopicDetailModel>> topicDetailBeanBaseResponseBean) {
                         super.onNext(topicDetailBeanBaseResponseBean);
                         adapter.setList(topicDetailBeanBaseResponseBean.getData().getList());
                         topicDetailColltoobarTitle.setText(topicDetailBeanBaseResponseBean.getData().getName());
-                        Glide.with(TopicDetailActivity.this).load(topicDetailBeanBaseResponseBean.getData().getImg_small()).into(topicDetailColltoobarBg);
+
+                        Glide.with(TopicDetailActivity.this).load(topicDetailBeanBaseResponseBean.getData().getImg())
+                                .asBitmap().into(new SimpleTarget<Bitmap>() {
+                            @Override
+                            public void onResourceReady(Bitmap bitmap, GlideAnimation<? super Bitmap> glideAnimation) {
+                                BitmapBlurUtil.addTask(bitmap, new Handler() {
+                                    @Override
+                                    public void handleMessage(Message msg) {
+                                        super.handleMessage(msg);
+                                        topicDetailColltoobarBg.setImageResource(R.drawable.shape_mongolia);
+                                        topicDetailColltoobarBg.setBackgroundDrawable((Drawable) msg.obj);
+                                    }
+                                });
+
+                            }
+                        });
                     }
 
                     @Override
