@@ -30,7 +30,8 @@
         <ImageView
             android:id="@+id/live_show_portrait"
             android:layout_width="28dp"
-            android:layout_height="28dp"/>
+            android:layout_height="28dp"
+            android:scaleType="fitXY"/>
 
         <TextView
             android:id="@+id/live_info"

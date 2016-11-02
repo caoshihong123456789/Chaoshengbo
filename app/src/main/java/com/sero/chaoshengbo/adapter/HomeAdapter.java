@@ -119,7 +119,23 @@ public class HomeAdapter extends RecyclerView.Adapter {
 
             case 2:
                 mViewHolder1 holder2 = (mViewHolder1) holder;
-                Glide.with(holder.itemView.getContext()).load(bean.getLives().get(getCountWithType(2,position)).getSnapshot()).into(holder2.imageLiveShow1);
+                Glide.with(holder.itemView.getContext()).load(bean.getLives().get(0).getUser().getLiveimgurl()).into(holder2.imageLiveShow1);
+                Glide.with(holder.itemView.getContext()).load(bean.getLives().get(0).getUser().getUser_avatar()).into(holder2.live_show_portrait1);
+                holder2.live_info1.setText(bean.getLives().get(0).getUser().getUser_name());
+                if(bean.getLives().get(0).getType().equals("1")){
+                    holder2.live_state_btn1.setText("直播");
+                }else{
+                    holder2.live_state_btn1.setText("");
+                }
+
+                Glide.with(holder.itemView.getContext()).load(bean.getLives().get(1).getUser().getLiveimgurl()).into(holder2.imageLiveShow2);
+                Glide.with(holder.itemView.getContext()).load(bean.getLives().get(1).getUser().getUser_avatar()).into(holder2.live_show_portrait2);
+                holder2.live_info2.setText(bean.getLives().get(1).getUser().getUser_name());
+                if(bean.getLives().get(0).getType().equals("1")){
+                    holder2.live_state_btn2.setText("直播");
+                }else{
+                    holder2.live_state_btn2.setText("");
+                }
                 break;
         }
     }
@@ -135,7 +151,15 @@ public class HomeAdapter extends RecyclerView.Adapter {
                 return new mViewHolder(view);
             case 2:
                 View view1 = LayoutInflater.from(parent.getContext()).inflate(R.layout.home_item_live, null);
-                return new mViewHolder1(view1);
+                mViewHolder1 holder1=new mViewHolder1(view1);
+                holder1.live_show_portrait1=(ImageView)holder1.liveShow1.findViewById(R.id.live_show_portrait);
+                holder1.live_state_btn1=(TextView)holder1.liveShow1.findViewById(R.id.live_state_btn);
+                holder1.live_info1=(TextView)holder1.liveShow1.findViewById(R.id.live_info);
+
+                holder1.live_show_portrait2=(ImageView)holder1.liveShow2.findViewById(R.id.live_show_portrait);
+                holder1.live_state_btn2=(TextView)holder1.liveShow2.findViewById(R.id.live_state_btn);
+                holder1.live_info2=(TextView)holder1.liveShow2.findViewById(R.id.live_info);
+                return holder1;
         }
 
     }
@@ -171,10 +195,17 @@ public class HomeAdapter extends RecyclerView.Adapter {
         ImageView imageLiveShow1;
         @Bind(R.id.live_show_1)
         RelativeLayout liveShow1;
+
+        ImageView live_show_portrait1;
+        TextView live_state_btn1,live_info1;
+
         @Bind(R.id.image_live_show_2)
         ImageView imageLiveShow2;
         @Bind(R.id.live_show_2)
         RelativeLayout liveShow2;
+
+        ImageView live_show_portrait2;
+        TextView live_state_btn2,live_info2;
 
         mViewHolder1(View view) {
             super(view);

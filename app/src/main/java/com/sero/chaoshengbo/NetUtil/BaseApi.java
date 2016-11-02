@@ -3,8 +3,13 @@ package com.sero.chaoshengbo.NetUtil;
 import com.sero.chaoshengbo.javabean.BaseResponseBean;
 import com.sero.chaoshengbo.javabean.FeatureDetailBean;
 import com.sero.chaoshengbo.javabean.HomeActivityBean;
-import com.sero.chaoshengbo.model.TopicDetailModel;
+import com.sero.chaoshengbo.javabean.LiveActivityLivesBean;
+import com.sero.chaoshengbo.javabean.LiveActivityRecommendedBean;
+import com.sero.chaoshengbo.model.CarouselModel;
 import com.sero.chaoshengbo.model.FeatureModel;
+import com.sero.chaoshengbo.model.TopicDetailModel;
+
+import java.util.List;
 
 import retrofit2.http.GET;
 import retrofit2.http.Query;
@@ -45,4 +50,24 @@ public interface BaseApi {
             @Query("pindex") int pindex
     );
 
+    /**获得现场页所有直播列表*/
+    @GET(GetString.LiveActivity_GETLives_URL)
+    Observable<BaseResponseBean<LiveActivityLivesBean>> LiveActivityGetLives(
+            @Query("user_id") String user_id,
+            @Query("psize") int psize,
+            @Query("pindex") int pindex
+    );
+
+
+    /**获得现场页轮播图列表*/
+    @GET(GetString.LiveActivity_GETCarousel_URL)
+    Observable<BaseResponseBean<List<CarouselModel>>> LiveActivityGetCarousel(
+            @Query("user_id") String user_id
+    );
+
+    /**获得现场页推荐主播列表*/
+    @GET(GetString.LiveActivity_GETRecommend_URL)
+    Observable<BaseResponseBean<LiveActivityRecommendedBean>> LiveActivityGetRecommendLives(
+            @Query("user_id") String user_id
+    );
 }

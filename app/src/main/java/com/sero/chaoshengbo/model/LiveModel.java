@@ -30,6 +30,16 @@ public class LiveModel extends PlayBackModel{
     private String date_create; //创建时间
     private String live_user_count; //当前在线人数
     private UserInfo user;
+    private String stream_json;//转为直播使用
+
+
+    public String getStream_json() {
+        return stream_json;
+    }
+
+    public void setStream_json(String stream_json) {
+        this.stream_json = stream_json;
+    }
 
     public UserInfo getUser() {
         return user;

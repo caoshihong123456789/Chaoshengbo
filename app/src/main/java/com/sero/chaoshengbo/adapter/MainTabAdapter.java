@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.sero.chaoshengbo.R;
 import com.sero.chaoshengbo.Util.AnimationUtil;
 import com.sero.chaoshengbo.module.HomeActivity;
+import com.sero.chaoshengbo.module.LiveActivity;
 import com.sero.chaoshengbo.module.TopicActivity;
 
 /**
@@ -39,11 +40,11 @@ public class MainTabAdapter extends FragmentPagerAdapter{
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                return TopicActivity.newInstance();
-            case 1:
                 return HomeActivity.newInstance("222", "222e");
-            case 2:
+            case 1:
                 return TopicActivity.newInstance();
+            case 2:
+                return LiveActivity.newInstance();
             case 3:
             default:
                 return HomeActivity.newInstance("444", "444e");
@@ -79,4 +80,6 @@ public class MainTabAdapter extends FragmentPagerAdapter{
         });
         return view;
     }
+
+
 }
