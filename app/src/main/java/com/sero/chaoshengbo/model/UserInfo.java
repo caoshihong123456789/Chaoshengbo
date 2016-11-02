@@ -12,6 +12,7 @@ public class UserInfo {
     private String user_sex; //
     private String user_name; //
     private String user_avatar; //用户头像
+    private String user_avatar_s; //用户头像
     private String user_location; //
     private String create_time; //创建时间
     private String introduce; //

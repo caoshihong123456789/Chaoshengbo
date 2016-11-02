@@ -38,6 +38,7 @@ public interface BaseApi {
     );
 
     /**获得首页咨询与推荐*/
+    @GET(GetString.HomeActivity_URL)
     Observable<BaseResponseBean<HomeActivityBean>> HomeActivityGetData(
             @Query("user_id") String user_id,
             @Query("psize") int psize,

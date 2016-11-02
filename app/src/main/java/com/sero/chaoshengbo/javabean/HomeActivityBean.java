@@ -14,51 +14,51 @@ import java.util.List;
  */
 
 public class HomeActivityBean {
-    private List<CarouselModel> carouselModelList;
-    private List<LiveModel> liveModelList;
-    private List<FeatureModel> featureModelList;
-    private List<InfoModel> infoModelList;
-    private List<InfoModel> topInfoModelList;
+    private List<CarouselModel> carousel;
+    private List<LiveModel> lives;
+    private List<FeatureModel> feature;
+    private List<InfoModel> info;
+    private List<InfoModel> top;
     private int count;
 
-    public List<CarouselModel> getCarouselModelList() {
-        return carouselModelList;
+    public List<CarouselModel> getCarousel() {
+        return carousel;
     }
 
-    public void setCarouselModelList(List<CarouselModel> carouselModelList) {
-        this.carouselModelList = carouselModelList;
+    public void setCarousel(List<CarouselModel> carousel) {
+        this.carousel = carousel;
     }
 
-    public List<LiveModel> getLiveModelList() {
-        return liveModelList;
+    public List<LiveModel> getLives() {
+        return lives;
     }
 
-    public void setLiveModelList(List<LiveModel> liveModelList) {
-        this.liveModelList = liveModelList;
+    public void setLives(List<LiveModel> lives) {
+        this.lives = lives;
     }
 
-    public List<FeatureModel> getFeatureModelList() {
-        return featureModelList;
+    public List<FeatureModel> getFeature() {
+        return feature;
     }
 
-    public void setFeatureModelList(List<FeatureModel> featureModelList) {
-        this.featureModelList = featureModelList;
+    public void setFeature(List<FeatureModel> feature) {
+        this.feature = feature;
     }
 
-    public List<InfoModel> getInfoModelList() {
-        return infoModelList;
+    public List<InfoModel> getInfo() {
+        return info;
     }
 
-    public void setInfoModelList(List<InfoModel> infoModelList) {
-        this.infoModelList = infoModelList;
+    public void setInfo(List<InfoModel> info) {
+        this.info = info;
     }
 
-    public List<InfoModel> getTopInfoModelList() {
-        return topInfoModelList;
+    public List<InfoModel> getTop() {
+        return top;
     }
 
-    public void setTopInfoModelList(List<InfoModel> topInfoModelList) {
-        this.topInfoModelList = topInfoModelList;
+    public void setTop(List<InfoModel> top) {
+        this.top = top;
     }
 
     public int getCount() {

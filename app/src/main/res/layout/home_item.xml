@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="8dp"
+    >
+
+    <ImageView
+        android:id="@+id/home_image"
+        android:layout_width="95dp"
+        android:layout_height="73dp"
+        android:scaleType="fitXY" />
+
+    <!--正标题-->
+    <TextView
+        android:id="@+id/home_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:textColor="@color/textColor3"
+        android:textSize="15dp"
+        android:typeface="normal"
+        android:layout_alignTop="@id/home_image"
+        android:layout_toRightOf="@id/home_image"
+        tools:text="奥运会2013开幕式！线程直憋，快来看啊，小伙伴们！" />
+
+    <!--副标题-->
+    <TextView
+        android:id="@+id/home_title_2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:textColor="@color/textColor9"
+        android:textSize="12dp"
+        android:layout_toRightOf="@id/home_image"
+        android:layout_below="@id/home_title"
+        tools:text="主播显示规则：按照编辑后台推荐顺序显示，无推荐或推荐数量不足时，优先显示签约主播，优先显示直播中主播，显示按观众数多少排序显示" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/home_title_2"
+        android:layout_alignParentRight="true"
+        android:orientation="horizontal"
+        >
+        <ImageView
+            android:id="@+id/home_feature"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:src="@mipmap/item_top"
+            />
+        <TextView
+            android:id="@+id/home_read_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/textColor9"
+            android:layout_margin="5dp"
+            tools:text="1000阅读"/>
+    </LinearLayout>
+
+
+</RelativeLayout>

@@ -12,6 +12,7 @@
 
 
     <color name="textColor3">#333333</color><!--普通文字颜色-->
+    <color name="textColor7">#777777</color>
     <color name="textColor9">#999999</color><!--普通介绍文字颜色-->
 
 </resources>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <TextView
+        android:id="@+id/live_state_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="3dp"
+        android:paddingRight="3dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="11dp"
+        android:textColor="@color/white_bg"
+        tools:text="直播"/><!--android:background="@drawable/living_show_btn"-->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:paddingLeft="9dp"
+        android:paddingBottom="8dp"
+        android:gravity="center_vertical"
+        ><!--android:background="@drawable/translucence_short"-->
+
+        <ImageView
+            android:id="@+id/live_show_portrait"
+            android:layout_width="28dp"
+            android:layout_height="28dp"/>
+
+        <TextView
+            android:id="@+id/live_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="13dp"
+            android:layout_marginLeft="9dp"
+            android:textColor="@color/white_bg"
+            android:maxLines="1"
+            android:ellipsize="end"
+            tools:text="Just do it"/>
+
+    </LinearLayout>
+
+</RelativeLayout>

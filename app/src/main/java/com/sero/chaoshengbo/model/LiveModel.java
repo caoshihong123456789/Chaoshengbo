@@ -29,6 +29,15 @@ public class LiveModel extends PlayBackModel{
     private String webview_url; //webview播放地址
     private String date_create; //创建时间
     private String live_user_count; //当前在线人数
+    private UserInfo user;
+
+    public UserInfo getUser() {
+        return user;
+    }
+
+    public void setUser(UserInfo user) {
+        this.user = user;
+    }
 
     public String getShow() {
         return show;

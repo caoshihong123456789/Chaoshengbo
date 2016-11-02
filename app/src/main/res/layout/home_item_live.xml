@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="214dp">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="12dp"
+        android:background="@color/gray_bg"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="37dp"
+        android:paddingLeft="11dp"
+        android:background="@color/white_bg">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="推荐直播"
+            android:textSize="15sp"
+            android:gravity="center_vertical"
+            android:textColor="@color/textColor3"
+            android:layout_alignParentLeft="true"/>
+
+        <TextView
+            android:id="@+id/more"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="更多"
+            android:textSize="14sp"
+            android:paddingRight="11dp"
+            android:paddingLeft="5dp"
+            android:drawableRight="@mipmap/img_rightback"
+            android:drawablePadding="6dp"
+            android:textColor="@color/textColor7"
+            android:gravity="center_vertical"
+            android:layout_alignParentRight="true"/>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white_bg"
+        android:orientation="horizontal"
+        android:paddingBottom="11dp"
+        android:paddingLeft="11dp"
+        android:paddingRight="11dp">
+
+        <RelativeLayout
+            android:id="@+id/live_show_1"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:layout_marginRight="6dp">
+
+            <ImageView
+                android:id="@+id/image_live_show_1"
+                android:layout_width="match_parent"
+                android:layout_height="166dp"
+                android:scaleType="fitXY"/>
+
+            <include
+                android:id="@+id/live_recommend_1"
+                layout="@layout/home_common_item_liveshow_cover" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/live_show_2"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/image_live_show_2"
+                android:layout_width="match_parent"
+                android:scaleType="fitXY"
+                android:layout_height="166dp"/>
+
+            <include
+                android:id="@+id/live_recommend_2"
+                layout="@layout/home_common_item_liveshow_cover" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="12dp"
+        android:background="@color/gray_bg"/>
+
+</LinearLayout>

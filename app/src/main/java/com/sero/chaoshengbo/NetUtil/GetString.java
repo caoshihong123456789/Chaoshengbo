@@ -14,6 +14,8 @@ public class GetString {
     static{
         switch (BuildConfig.buildType){
             case 1://debug版本 现在还没有测试版本，不需要
+                YBXC_URL="http://101.201.41.89/";
+                break;
             case 0://正式版本
 
                 YBXC_URL="http://www.yingboxuncai.com/";
