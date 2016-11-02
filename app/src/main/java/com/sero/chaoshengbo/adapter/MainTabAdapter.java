@@ -42,9 +42,9 @@ public class MainTabAdapter extends FragmentPagerAdapter{
             case 0:
                 return HomeActivity.newInstance("222", "222e");
             case 1:
-                return TopicActivity.newInstance();
-            case 2:
                 return LiveActivity.newInstance();
+            case 2:
+                return TopicActivity.newInstance();
             case 3:
             default:
                 return HomeActivity.newInstance("444", "444e");
