@@ -1,18 +1,24 @@
 package com.sero.chaoshengbo.module;
 
 import android.os.Bundle;
+import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.sero.chaoshengbo.NetUtil.BaseApi;
 import com.sero.chaoshengbo.NetUtil.BaseSubscriber;
 import com.sero.chaoshengbo.NetUtil.NetUtil;
 import com.sero.chaoshengbo.R;
+import com.sero.chaoshengbo.adapter.CarouselAdapter;
 import com.sero.chaoshengbo.adapter.LiveAdapter;
 import com.sero.chaoshengbo.javabean.BaseResponseBean;
 import com.sero.chaoshengbo.javabean.LiveActivityBean;
@@ -24,7 +30,6 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Func3;
@@ -37,9 +42,18 @@ public class LiveActivity extends BaseFragment {
 
     @Bind(R.id.live_recyclerview)
     RecyclerView liveRecyclerview;
-    @Bind(R.id.live_button)
-    Button liveButton;
+    @Bind(R.id.carousel_colltoobar_viewpager)
+    ViewPager carouselColltoobarViewpager;
+    @Bind(R.id.carousel_colltoobar_title)
+    TextView carouselColltoobarTitle;
+    @Bind(R.id.carousel_colltoobar_menu)
+    ImageView carouselColltoobarMenu;
+    @Bind(R.id.carousel_colltoobar_layout)
+    Toolbar carouselColltoobarLayout;
+    @Bind(R.id.carousel_colltoobar)
+    CollapsingToolbarLayout carouselColltoobar;
     private LiveAdapter adapter;
+    private CarouselAdapter carcouselAdapter;
 
     public LiveActivity() {
         // Required empty public constructor
@@ -60,10 +74,6 @@ public class LiveActivity extends BaseFragment {
         return view;
     }
 
-    @OnClick(R.id.live_button)
-    public void onClick() {
-        initData();
-    }
 
     @Override
     public void onDestroyView() {
@@ -71,9 +81,21 @@ public class LiveActivity extends BaseFragment {
         ButterKnife.unbind(this);
     }
 
-    private void initView(){
+    private void initView() {
+        //给页面设置工具栏
+        ((AppCompatActivity) getActivity()).setSupportActionBar(carouselColltoobarLayout);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);//返回键
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(false);
+        carouselColltoobarTitle.setText("现场");
+
+        //设置工具栏标题
+        carouselColltoobar.setTitleEnabled(false);
+
+        carcouselAdapter = new CarouselAdapter();
+        carouselColltoobarViewpager.setAdapter(carcouselAdapter);
+
         liveRecyclerview.setLayoutManager(new LinearLayoutManager(getActivity()));
-        adapter=new LiveAdapter();
+        adapter = new LiveAdapter();
         liveRecyclerview.setAdapter(adapter);
     }
 
@@ -86,38 +108,39 @@ public class LiveActivity extends BaseFragment {
                         BaseResponseBean<LiveActivityRecommendedBean>, LiveActivityBean>() {
                     @Override
                     public LiveActivityBean call(BaseResponseBean<LiveActivityLivesBean> listLives,
-                                       BaseResponseBean<List<CarouselModel>> listCarousel,
-                                       BaseResponseBean<LiveActivityRecommendedBean> listRecommend) {
-                        Log.e("liveActivity--zip","--"+listLives+listCarousel+listRecommend);
+                                                 BaseResponseBean<List<CarouselModel>> listCarousel,
+                                                 BaseResponseBean<LiveActivityRecommendedBean> listRecommend) {
+                        Log.e("liveActivity--zip", "--" + listLives + listCarousel + listRecommend);
                         return new LiveActivityBean(listLives.getData().getList(),
                                 listCarousel.getData(),
                                 listRecommend.getData().getBean());
                     }
                 }
         ).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
-        .subscribe(new BaseSubscriber<LiveActivityBean>(this.getActivity()) {
-            @Override
-            public void onStart() {
-                super.onStart();
-            }
+                .subscribe(new BaseSubscriber<LiveActivityBean>(this.getActivity()) {
+                    @Override
+                    public void onStart() {
+                        super.onStart();
+                    }
 
-            @Override
-            public void onCompleted() {
-                super.onCompleted();
-            }
+                    @Override
+                    public void onCompleted() {
+                        super.onCompleted();
+                    }
 
-            @Override
-            public void onError(Throwable e) {
-                super.onError(e);
-            }
+                    @Override
+                    public void onError(Throwable e) {
+                        super.onError(e);
+                    }
 
-            @Override
-            public void onNext(LiveActivityBean bean) {
-                super.onNext(bean);
-                adapter.setList(bean);
-                Log.e("输出bean：" ,"--"+bean.toString());
-            }
-        });
+                    @Override
+                    public void onNext(LiveActivityBean bean) {
+                        super.onNext(bean);
+                        adapter.setList(bean);
+                        carcouselAdapter.setList(bean.getCarousel(), getActivity());
+                        Log.e("输出bean：", "--" + bean.toString());
+                    }
+                });
     }
 
 

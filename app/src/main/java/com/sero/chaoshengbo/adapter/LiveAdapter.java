@@ -1,6 +1,7 @@
 package com.sero.chaoshengbo.adapter;
 
 import android.content.Context;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,6 +25,7 @@ public class LiveAdapter extends RecyclerView.Adapter {
 
     private LiveActivityBean bean;
     private Context context;
+
     public void setList(LiveActivityBean bean) {
         this.bean = bean;
         this.notifyDataSetChanged();
@@ -31,52 +33,77 @@ public class LiveAdapter extends RecyclerView.Adapter {
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        context=parent.getContext();
-        View view = LayoutInflater.from(context).inflate(R.layout.live_item, parent, false);
-        return new ViewHolder(view);
+        context = parent.getContext();
+        switch (viewType) {
+            case 0:
+                View view0 = LayoutInflater.from(context).inflate(R.layout.liveitem_recommend_item, parent, false);
+                return new ViewHolder0(view0);
+            case 1:
+            default:
+                View view = LayoutInflater.from(context).inflate(R.layout.live_item, parent, false);
+                return new ViewHolder(view);
+        }
+
     }
 
     @Override
     public int getItemViewType(int position) {
-        return super.getItemViewType(position);
+        switch (position) {
+            case 0:
+                return 0;
+            default:
+                return 1;
+        }
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        ViewHolder holder1=(ViewHolder)holder;
+        if(holder instanceof ViewHolder0){
+            ViewHolder0 holder1 = (ViewHolder0) holder;
+            LinearLayoutManager linearLayoutManager=new LinearLayoutManager(context);
+            linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+            holder1.recomendRecyclerview.setLayoutManager(linearLayoutManager);
+            LiveRecommendAdapter adapter=new LiveRecommendAdapter(context,bean.getRecommondLives());
+            holder1.recomendRecyclerview.setAdapter(adapter);
 
-        Glide.with(context).load(bean.getLives().get(position).getUser().getUser_avatar()).into(holder1.liveAvatar);
-        Glide.with(context).load(bean.getLives().get(position).getUser().getLiveimgurl()).into(holder1.liveImage);
-        holder1.liveLocation.setText(bean.getLives().get(position).getUser().getUser_location());
-        holder1.liveName.setText(bean.getLives().get(position).getUser().getUser_name());
-        holder1.liveNumber.setText(bean.getLives().get(position).getLive_user_count());
-        holder1.liveTitle.setText(bean.getLives().get(position).getTitle());
-        switch (bean.getLives().get(position).getUser().getUser_sex()){
-            case "男":
-                holder1.liveName.setCompoundDrawables(null,null,context.getResources().getDrawable(R.mipmap.img_boy),null);
-                break;
-            case "女":
-                holder1.liveName.setCompoundDrawables(null,null,context.getResources().getDrawable(R.mipmap.img_girl),null);
-                break;
+        }else{
+            ViewHolder holder1 = (ViewHolder) holder;
+
+            Glide.with(context).load(bean.getLives().get(position).getUser().getUser_avatar()).into(holder1.liveAvatar);
+            Glide.with(context).load(bean.getLives().get(position).getUser().getLiveimgurl()).into(holder1.liveImage);
+            holder1.liveLocation.setText(bean.getLives().get(position).getUser().getUser_location());
+            holder1.liveName.setText(bean.getLives().get(position).getUser().getUser_name());
+            holder1.liveNumber.setText(bean.getLives().get(position).getLive_user_count());
+            holder1.liveTitle.setText(bean.getLives().get(position).getTitle());
+            switch (bean.getLives().get(position).getUser().getUser_sex()) {
+                case "男":
+                    holder1.liveName.setCompoundDrawables(null, null, context.getResources().getDrawable(R.mipmap.img_boy), null);
+                    break;
+                case "女":
+                    holder1.liveName.setCompoundDrawables(null, null, context.getResources().getDrawable(R.mipmap.img_girl), null);
+                    break;
+            }
+
+            switch (bean.getLives().get(position).getType()) {
+                case "0":
+                    holder1.liveType.setText(bean.getLives().get(position).getHorizontal().equals("0") ? "手机直播" : "PC直播");
+                    break;
+                case "1":
+                    holder1.liveType.setText(bean.getLives().get(position).getHorizontal().equals("0") ? "手机回放" : "PC回放");
+                    break;
+            }
         }
 
-        switch (bean.getLives().get(position).getType()){
-            case "0":
-                holder1.liveType.setText(bean.getLives().get(position).getHorizontal().equals("0")?"手机直播":"PC直播");
-                break;
-            case "1":
-                holder1.liveType.setText(bean.getLives().get(position).getHorizontal().equals("0")?"手机回放":"PC回放");
-                break;
-        }
 
     }
 
     @Override
     public int getItemCount() {
-        return bean==null?0:bean.getLives().size();
+        return bean == null ? 0 : bean.getLives().size();
     }
 
-    static class ViewHolder extends RecyclerView.ViewHolder{
+
+    static class ViewHolder extends RecyclerView.ViewHolder {
         @Bind(R.id.live_avatar)
         ImageView liveAvatar;
         @Bind(R.id.live_name)
@@ -97,6 +124,16 @@ public class LiveAdapter extends RecyclerView.Adapter {
         ImageView liveStatus;
 
         public ViewHolder(View view) {
+            super(view);
+            ButterKnife.bind(this, view);
+        }
+    }
+
+    static class ViewHolder0 extends RecyclerView.ViewHolder {
+        @Bind(R.id.recomend_recyclerview)
+        RecyclerView recomendRecyclerview;
+
+        ViewHolder0(View view) {
             super(view);
             ButterKnife.bind(this, view);
         }

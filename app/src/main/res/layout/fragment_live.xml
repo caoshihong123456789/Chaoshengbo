@@ -1,25 +1,22 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.sero.chaoshengbo.module.LiveActivity">
 
-    <!-- TODO: Update blank fragment layout -->
-    <Button
-        android:id="@+id/live_button"
-        android:layout_width="match_parent"
-        android:layout_height="260dp"
-        android:background="#00ddff"
-        android:gravity="center"
-        android:text="@string/hello_blank_fragment" />
+    <include layout="@layout/viewpager_collspaningtoolbar_layout" />
+
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/live_recyclerview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/live_button"
-        >
+        android:background="@color/line_color"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
     </android.support.v7.widget.RecyclerView>
 
-</RelativeLayout>
+
+
+</android.support.design.widget.CoordinatorLayout>

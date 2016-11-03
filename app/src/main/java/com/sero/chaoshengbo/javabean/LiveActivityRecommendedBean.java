@@ -33,7 +33,7 @@ public class LiveActivityRecommendedBean {
         this.list = bean;
     }
 
-    class myUserInfoBean extends UserInfo{
+    public class myUserInfoBean extends UserInfo{
         private LiveModel live;
 
         public LiveModel getLive() {

@@ -8,4 +8,6 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <!--title-->
 
+    <string name="live_reconment_title">推荐主播</string>
+
 </resources>

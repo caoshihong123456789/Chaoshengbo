@@ -5,6 +5,7 @@
     <color name="white_bg">#ffffff</color><!--全局色， 白色-->
     <color name="black_bg">#000000</color><!--全局色， 黑色-->
     <color name="gray_bg">#f0f3f5</color><!--全局色， 灰色-->
+    <color name="line_color">#dedede</color><!--全局线的颜色-->
     <color name="colorAccent">#FF4081</color>
 
     <color name="tabBackground">#28252d</color><!--tab页 标签的背景颜色-->

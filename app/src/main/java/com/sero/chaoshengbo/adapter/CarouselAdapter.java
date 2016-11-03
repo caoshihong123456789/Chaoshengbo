@@ -34,6 +34,10 @@ public class CarouselAdapter extends PagerAdapter{
         this.notifyDataSetChanged();
     }
 
+    public void setLiveList(List<CarouselModel>  list,Context context){
+
+    }
+
     @Override
     public int getCount() {
         return list==null?0:list.size();
