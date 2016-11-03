@@ -36,6 +36,7 @@ public class GetString {
     public static final String LiveActivity_GETLives_URL="/chat/qiniu/livelist";//现场页获得全部主播列表
     public static final String LiveActivity_GETCarousel_URL="/chat/index/carousel";//现场页获得轮播图列表
     public static final String LiveActivity_GETRecommend_URL="/chat/index/recommendanchors";//现场页获得推荐主播列表
+    public static final String UserCenterActivity_getUserInfo_URL="/chat/Qiniu/getuser";//我的页面获得个人信息
 
 
 

@@ -15,6 +15,7 @@ import com.sero.chaoshengbo.Util.AnimationUtil;
 import com.sero.chaoshengbo.module.HomeActivity;
 import com.sero.chaoshengbo.module.LiveActivity;
 import com.sero.chaoshengbo.module.TopicActivity;
+import com.sero.chaoshengbo.module.UserCenterActivity;
 
 /**
  * Created by Administrator on 2016/10/20.
@@ -47,7 +48,7 @@ public class MainTabAdapter extends FragmentPagerAdapter{
                 return TopicActivity.newInstance();
             case 3:
             default:
-                return HomeActivity.newInstance("444", "444e");
+                return UserCenterActivity.newInstance();
         }
     }
 

@@ -8,6 +8,7 @@ import com.sero.chaoshengbo.javabean.LiveActivityRecommendedBean;
 import com.sero.chaoshengbo.model.CarouselModel;
 import com.sero.chaoshengbo.model.FeatureModel;
 import com.sero.chaoshengbo.model.TopicDetailModel;
+import com.sero.chaoshengbo.model.UserInfo;
 
 import java.util.List;
 
@@ -70,4 +71,12 @@ public interface BaseApi {
     Observable<BaseResponseBean<LiveActivityRecommendedBean>> LiveActivityGetRecommendLives(
             @Query("user_id") String user_id
     );
+
+    /**获得现场页推荐主播列表*/
+    @GET(GetString.UserCenterActivity_getUserInfo_URL)
+    Observable<BaseResponseBean<UserInfo>> UserCenterActivityLives(
+            @Query("user_id") String user_id
+    );
+
+
 }

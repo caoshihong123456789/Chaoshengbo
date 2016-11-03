@@ -10,4 +10,17 @@
 
     <string name="live_reconment_title">推荐主播</string>
 
+    <!--我的-->
+    <string name="user_txt1">粉丝贡献榜</string>
+    <string name="user_txt2">我的视频</string>
+    <string name="user_txt3">我的消息</string>
+    <string name="user_txt4">我的能量（充值）</string>
+    <string name="user_txt5">我的卡路里（收入）</string>
+    <string name="user_txt6">我的账单</string>
+    <string name="user_txt7">常见问题</string>
+    <string name="user_txt8">猜神驾到</string>
+    <string name="user_txt9">设置</string>
+    <string name="user_txt8_1">赢金币，换礼物</string>
+    <!--我的-->
+
 </resources>
