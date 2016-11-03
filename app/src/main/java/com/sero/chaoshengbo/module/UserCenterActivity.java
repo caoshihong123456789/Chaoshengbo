@@ -15,6 +15,7 @@ import com.sero.chaoshengbo.NetUtil.BaseApi;
 import com.sero.chaoshengbo.NetUtil.BaseSubscriber;
 import com.sero.chaoshengbo.NetUtil.NetUtil;
 import com.sero.chaoshengbo.R;
+import com.sero.chaoshengbo.Util.GlideCircleTransform;
 import com.sero.chaoshengbo.javabean.BaseResponseBean;
 import com.sero.chaoshengbo.model.UserInfo;
 
@@ -123,7 +124,9 @@ public class UserCenterActivity extends BaseFragment {
     }
 
     private void initView(UserInfo info) {
-        Glide.with(this.getActivity()).load(info.getUser_avatar()).into(userAvator);//头像
+        Glide.with(this.getActivity()).load(info.getUser_avatar())
+                .transform(new GlideCircleTransform(getActivity()))
+                .into(userAvator);
         userName.setText(info.getUser_name());
         userLocation.setText(info.getUser_location());
         userIntro.setText(info.getIntroduce());

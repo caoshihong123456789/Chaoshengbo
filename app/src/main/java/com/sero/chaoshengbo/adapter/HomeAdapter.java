@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.sero.chaoshengbo.R;
+import com.sero.chaoshengbo.Util.GlideCircleTransform;
 import com.sero.chaoshengbo.javabean.HomeActivityBean;
 
 import java.util.List;
@@ -120,7 +121,8 @@ public class HomeAdapter extends RecyclerView.Adapter {
             case 2:
                 mViewHolder1 holder2 = (mViewHolder1) holder;
                 Glide.with(holder.itemView.getContext()).load(bean.getLives().get(0).getUser().getLiveimgurl()).into(holder2.imageLiveShow1);
-                Glide.with(holder.itemView.getContext()).load(bean.getLives().get(0).getUser().getUser_avatar()).into(holder2.live_show_portrait1);
+                Glide.with(holder.itemView.getContext()).load(bean.getLives().get(0).getUser().getUser_avatar()).
+                        transform(new GlideCircleTransform(holder.itemView.getContext())).into(holder2.live_show_portrait1);
                 holder2.live_info1.setText(bean.getLives().get(0).getUser().getUser_name());
                 if(bean.getLives().get(0).getType().equals("1")){
                     holder2.live_state_btn1.setText("直播");
@@ -129,7 +131,8 @@ public class HomeAdapter extends RecyclerView.Adapter {
                 }
 
                 Glide.with(holder.itemView.getContext()).load(bean.getLives().get(1).getUser().getLiveimgurl()).into(holder2.imageLiveShow2);
-                Glide.with(holder.itemView.getContext()).load(bean.getLives().get(1).getUser().getUser_avatar()).into(holder2.live_show_portrait2);
+                Glide.with(holder.itemView.getContext()).load(bean.getLives().get(1).getUser().getUser_avatar())
+                        .transform(new GlideCircleTransform(holder.itemView.getContext())).into(holder2.live_show_portrait2);
                 holder2.live_info2.setText(bean.getLives().get(1).getUser().getUser_name());
                 if(bean.getLives().get(0).getType().equals("1")){
                     holder2.live_state_btn2.setText("直播");

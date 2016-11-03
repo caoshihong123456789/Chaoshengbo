@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.sero.chaoshengbo.R;
+import com.sero.chaoshengbo.Util.GlideCircleTransform;
 import com.sero.chaoshengbo.javabean.LiveActivityBean;
 
 import butterknife.Bind;
@@ -69,7 +70,7 @@ public class LiveAdapter extends RecyclerView.Adapter {
         }else{
             ViewHolder holder1 = (ViewHolder) holder;
 
-            Glide.with(context).load(bean.getLives().get(position).getUser().getUser_avatar()).into(holder1.liveAvatar);
+            Glide.with(context).load(bean.getLives().get(position).getUser().getUser_avatar()).transform(new GlideCircleTransform(context)).into(holder1.liveAvatar);
             Glide.with(context).load(bean.getLives().get(position).getUser().getLiveimgurl()).into(holder1.liveImage);
             holder1.liveLocation.setText(bean.getLives().get(position).getUser().getUser_location());
             holder1.liveName.setText(bean.getLives().get(position).getUser().getUser_name());

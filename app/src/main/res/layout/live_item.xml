@@ -16,7 +16,6 @@
             android:id="@+id/live_avatar"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:background="@color/colorAccent"
             android:layout_centerVertical="true"
             android:layout_marginRight="10dp"
             android:scaleType="fitXY"

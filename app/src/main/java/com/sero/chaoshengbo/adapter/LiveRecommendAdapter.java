@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.sero.chaoshengbo.R;
+import com.sero.chaoshengbo.Util.GlideCircleTransform;
 import com.sero.chaoshengbo.javabean.LiveActivityRecommendedBean;
 
 import java.util.List;
@@ -57,7 +58,9 @@ public class LiveRecommendAdapter extends RecyclerView.Adapter {
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         ViewHolder viewHolder=(ViewHolder)holder;
 //        viewHolder.liveRecommendImg
-        Glide.with(context).load(list.get(position).getUser_avatar()).into(viewHolder.liveRecommendImg);
+        Glide.with(context).load(list.get(position).getUser_avatar())
+                .transform(new GlideCircleTransform(context))
+                .into(viewHolder.liveRecommendImg);
         viewHolder.liveRecommendText.setText(list.get(position).getUser_name());
     }
 
