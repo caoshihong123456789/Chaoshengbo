@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.AppBarLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:fitsSystemWindows="true"
+    android:clipToPadding="false"
+    app:contentScrim="@color/colorPrimaryDark"
+    android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+    <android.support.design.widget.CollapsingToolbarLayout
+        android:id="@+id/carousel_colltoobar"
+        android:layout_width="match_parent"
+        android:layout_height="240dp"
+        android:fitsSystemWindows="true"
+        android:clipToPadding="false"
+        android:minHeight="45dp"
+        app:layout_collapseParallaxMultiplier="0.7"
+        app:layout_scrollFlags="scroll|exitUntilCollapsed"><!--exitUntilCollapsed enterAlways snap enterAlways enterAlwaysCollapsed-->
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/carousel_colltoobar_viewpager"
+            android:layout_width="match_parent"
+            android:layout_height="195dp"
+            android:layout_marginTop="45dp"
+            android:scaleType="fitXY"
+            android:background="@color/colorPrimaryDark"/>
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/carousel_colltoobar_layout"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:orientation="vertical"
+            app:layout_collapseMode="pin"
+            android:background="@color/colorPrimaryDark"
+            >
+
+            <TextView
+                android:id="@+id/carousel_colltoobar_title"
+                tools:text="标题"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center_horizontal"
+                android:textColor="@color/black_bg"
+                android:textSize="18sp" />
+
+            <ImageView
+                android:id="@+id/carousel_colltoobar_menu"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical|right"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                tools:src="@mipmap/mores" />
+
+        </android.support.v7.widget.Toolbar>
+
+
+
+
+
+    </android.support.design.widget.CollapsingToolbarLayout>
+</android.support.design.widget.AppBarLayout>

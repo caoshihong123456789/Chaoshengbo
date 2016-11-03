@@ -1,25 +1,30 @@
 package com.sero.chaoshengbo.module;
 
 import android.os.Bundle;
+import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.sero.chaoshengbo.NetUtil.BaseApi;
 import com.sero.chaoshengbo.NetUtil.BaseSubscriber;
 import com.sero.chaoshengbo.NetUtil.NetUtil;
 import com.sero.chaoshengbo.R;
+import com.sero.chaoshengbo.adapter.CarouselAdapter;
 import com.sero.chaoshengbo.adapter.HomeAdapter;
 import com.sero.chaoshengbo.javabean.BaseResponseBean;
 import com.sero.chaoshengbo.javabean.HomeActivityBean;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
@@ -28,12 +33,21 @@ import rx.schedulers.Schedulers;
  */
 public class HomeActivity extends BaseFragment {
 
-    @Bind(R.id.fragment1_button)
-    Button fragment1Button;
     @Bind(R.id.home_recyclerview)
     RecyclerView homeRecyclerview;
+    @Bind(R.id.carousel_colltoobar_viewpager)
+    ViewPager carouselColltoobarViewpager;
+    @Bind(R.id.carousel_colltoobar_title)
+    TextView carouselColltoobarTitle;
+    @Bind(R.id.carousel_colltoobar_menu)
+    ImageView carouselColltoobarMenu;
+    @Bind(R.id.carousel_colltoobar_layout)
+    Toolbar carouselColltoobarLayout;
+    @Bind(R.id.carousel_colltoobar)
+    CollapsingToolbarLayout carouselColltoobar;
 
     private HomeAdapter myAdapter;
+    private  CarouselAdapter carcouselAdapter;
 
     public static HomeActivity newInstance(String param1, String param2) {
         HomeActivity fragment = new HomeActivity();
@@ -62,15 +76,24 @@ public class HomeActivity extends BaseFragment {
         ButterKnife.unbind(this);
     }
 
-    @OnClick(R.id.fragment1_button)
-    public void onClick() {
-        initData();
-    }
 
     private void initView() {
+        //给页面设置工具栏
+        ((AppCompatActivity)getActivity()).setSupportActionBar(carouselColltoobarLayout);
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);//返回键
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(false);
+        carouselColltoobarTitle.setText("首页");
+
+        //设置工具栏标题
+//        carouselColltoobar.setTitle("首页");
+        carouselColltoobar.setTitleEnabled(false);
+
+        carcouselAdapter =new CarouselAdapter();
+        carouselColltoobarViewpager.setAdapter(carcouselAdapter);
+
 
         homeRecyclerview.setLayoutManager(new LinearLayoutManager(getActivity()));
-        myAdapter=new HomeAdapter();
+        myAdapter = new HomeAdapter();
         homeRecyclerview.setAdapter(myAdapter);
     }
 
@@ -101,6 +124,7 @@ public class HomeActivity extends BaseFragment {
                         super.onNext(homeActivityBeanBaseResponseBean);
                         Log.e("输出首页数据", "--" + homeActivityBeanBaseResponseBean.getData().toString());
                         myAdapter.setData(homeActivityBeanBaseResponseBean.getData());
+                        carcouselAdapter.setList(homeActivityBeanBaseResponseBean.getData().getCarousel(),getActivity());
 
                     }
                 });
