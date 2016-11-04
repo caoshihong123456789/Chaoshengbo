@@ -1,4 +1,4 @@
-package com.sero.chaoshengbo.module;
+package com.sero.chaoshengbo.activity;
 
 
 import android.app.Fragment;

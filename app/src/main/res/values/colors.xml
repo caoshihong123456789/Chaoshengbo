@@ -7,6 +7,7 @@
     <color name="black_bg">#000000</color><!--全局色， 黑色-->
     <color name="gray_bg">#f0f3f5</color><!--全局色， 灰色-->
     <color name="tran_black_bg">#6f000000</color><!--全局色， 透明黑色-->
+    <color name="tran_white_bg">#3fffffff</color><!--全局色， 透明白色-->
     <color name="line_color">#dedede</color><!--全局线的颜色-->
     <color name="colorAccent">#FF4081</color>
 

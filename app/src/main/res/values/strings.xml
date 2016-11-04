@@ -3,10 +3,7 @@
 
     <!--title-->
     <string name="topic_title">专题</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <!--title-->
+    <string name="back">返回</string>
 
     <string name="live_reconment_title">推荐主播</string>
 
@@ -23,4 +20,8 @@
     <string name="user_txt8_1">赢金币，换礼物</string>
     <!--我的-->
 
+    <!--登陆-->
+    <string name="login_type">请选择登录方式</string>
+    <string name="login_agreement">我已同意并阅读<u>超声播用户协议</u></string>
+    <!--登陆-->
 </resources>

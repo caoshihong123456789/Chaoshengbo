@@ -14,6 +14,7 @@ import com.sero.chaoshengbo.R;
 import com.sero.chaoshengbo.Util.AnimationUtil;
 import com.sero.chaoshengbo.module.HomeActivity;
 import com.sero.chaoshengbo.module.LiveActivity;
+import com.sero.chaoshengbo.module.LoginActivity;
 import com.sero.chaoshengbo.module.TopicActivity;
 import com.sero.chaoshengbo.module.UserCenterActivity;
 
@@ -64,7 +65,7 @@ public class MainTabAdapter extends FragmentPagerAdapter{
     }
 
 
-    public View getTabView(int position) {
+    public View getTabView(final int position) {
         View view = LayoutInflater.from(context).inflate(R.layout.maintab_item_layout, null);
         TextView textView = (TextView) view.findViewById(R.id.tvTitle);
         final ImageView imageView = (ImageView) view.findViewById(R.id.ivIcon);
@@ -73,10 +74,17 @@ public class MainTabAdapter extends FragmentPagerAdapter{
         view.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                if(event.getAction()==MotionEvent.ACTION_DOWN){
-                    AnimationUtil.animationScale(imageView,150,0);
+                switch (event.getAction()){
+                    case MotionEvent.ACTION_DOWN:
+                        AnimationUtil.animationScale(imageView,150,0);
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        if(position == 3){
+                            LoginActivity.startLogin(context);
+                        }
+                        break;
                 }
-                return false;
+                return true;
             }
         });
         return view;

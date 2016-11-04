@@ -23,6 +23,7 @@ import com.sero.chaoshengbo.NetUtil.NetUtil;
 import com.sero.chaoshengbo.R;
 import com.sero.chaoshengbo.Util.BitmapBlurUtil;
 import com.sero.chaoshengbo.Util.GlideCircleTransform;
+import com.sero.chaoshengbo.activity.BaseFragment;
 import com.sero.chaoshengbo.javabean.BaseResponseBean;
 import com.sero.chaoshengbo.model.UserInfo;
 
