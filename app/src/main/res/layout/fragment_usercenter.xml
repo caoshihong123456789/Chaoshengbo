@@ -12,187 +12,194 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <RelativeLayout
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="wrap_content">
 
             <ImageView
                 android:id="@+id/user_avator_bg"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/colorPrimary" />
+                android:background="@color/colorAccent" />
 
-
-            <ImageView
-                android:id="@+id/user_avator"
-                android:layout_width="66dp"
-                android:layout_height="66dp"
-                android:layout_centerHorizontal="true"
-                android:layout_marginBottom="10dp"
-                android:layout_marginTop="40dp"
-                tools:src="@mipmap/ic_launcher" />
-
-            <TextView
-                android:id="@+id/user_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_below="@id/user_avator"
-                android:layout_marginBottom="10dp"
-                android:drawablePadding="5dp"
-                android:textColor="@color/white_bg"
-                tools:text="名字" />
-
-            <TextView
-                android:id="@+id/user_location"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_below="@id/user_name"
-                android:layout_marginBottom="10dp"
-                android:textColor="@color/white_bg"
-                android:textSize="11dp"
-                tools:text="地址" />
-
-            <TextView
-                android:id="@+id/user_intro"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_below="@id/user_location"
-                android:layout_marginBottom="10dp"
-                android:textColor="@color/white_bg"
-                android:textSize="12dp"
-                tools:text="个人介绍" />
-
-            <TextView
-                android:id="@+id/user_follow"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_marginBottom="10dp"
-                android:background="@drawable/solid_button_shape"
-                android:layout_below="@id/user_intro"
-                android:paddingBottom="5dp"
-                android:paddingLeft="20dp"
-                android:paddingRight="20dp"
-                android:paddingTop="5dp"
-                android:text="编辑"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="15dp" />
-
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:background="@color/tran_black_bg"
-                android:orientation="horizontal"
-                android:layout_below="@id/user_follow">
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-                <LinearLayout
-                    android:id="@+id/user_attention_layout"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="5dp"
-                        android:textColor="@color/white_bg"
-                        android:textSize="15sp"
-                        android:textStyle="bold"
-                        tools:text="30"
-                        android:id="@+id/user_attention_text" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/white_bg"
-                        android:textSize="15sp"
-                        tools:text="关注"
-                        android:text="关注" />
-                </LinearLayout>
 
                 <ImageView
-                    android:layout_width="0.1dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginBottom="9dp"
-                    android:layout_marginTop="9dp"
-                    android:background="@color/white_bg" />
+                    android:id="@+id/user_avator"
+                    android:layout_width="66dp"
+                    android:layout_height="66dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="40dp"
+                    tools:src="@mipmap/ic_launcher" />
+
+                <TextView
+                    android:id="@+id/user_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/user_avator"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="10dp"
+                    android:gravity="center_vertical"
+                    android:drawablePadding="5dp"
+                    android:textColor="@color/white_bg"
+                    tools:drawableRight="@mipmap/img_boy"
+                    tools:text="名字" />
+
+                <TextView
+                    android:id="@+id/user_location"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/user_name"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="10dp"
+                    android:textColor="@color/white_bg"
+                    android:textSize="11dp"
+                    tools:text="地址" />
+
+                <TextView
+                    android:id="@+id/user_intro"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/user_location"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="10dp"
+                    android:textColor="@color/white_bg"
+                    android:textSize="12dp"
+                    tools:text="个人介绍" />
+
+                <TextView
+                    android:id="@+id/user_follow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/user_intro"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/solid_button_shape"
+                    android:paddingBottom="5dp"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:paddingTop="5dp"
+                    android:text="编辑"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="15dp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical">
+                    android:layout_height="50dp"
+                    android:layout_below="@id/user_follow"
+                    android:background="@color/tran_black_bg"
+                    android:orientation="horizontal">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="5dp"
-                        android:textColor="@color/white_bg"
-                        android:textSize="15sp"
-                        android:textStyle="bold"
-                        tools:text="30"
-                        android:id="@+id/user_follow_text" />
+                    <LinearLayout
+                        android:id="@+id/user_attention_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/white_bg"
-                        android:textSize="15sp"
-                        tools:text="粉丝"
-                        android:text="粉丝" />
+                        <TextView
+                            android:id="@+id/user_attention_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="5dp"
+                            android:textColor="@color/white_bg"
+                            android:textSize="15sp"
+                            android:textStyle="bold"
+                            tools:text="30" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="关注"
+                            android:textColor="@color/white_bg"
+                            android:textSize="15sp"
+                            tools:text="关注" />
+                    </LinearLayout>
+
+                    <ImageView
+                        android:layout_width="0.1dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="9dp"
+                        android:layout_marginTop="9dp"
+                        android:background="@color/white_bg" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/user_follow_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="5dp"
+                            android:textColor="@color/white_bg"
+                            android:textSize="15sp"
+                            android:textStyle="bold"
+                            tools:text="30" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="粉丝"
+                            android:textColor="@color/white_bg"
+                            android:textSize="15sp"
+                            tools:text="粉丝" />
+                    </LinearLayout>
+
+                    <ImageView
+                        android:layout_width="0.1dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="9dp"
+                        android:layout_marginTop="9dp"
+                        android:background="@color/white_bg" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/user_buzz_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="5dp"
+                            android:textColor="@color/white_bg"
+                            android:textSize="15sp"
+                            android:textStyle="bold"
+                            tools:text="30" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="人气"
+                            android:textColor="@color/white_bg"
+                            android:textSize="15sp"
+                            tools:text="人气" />
+                    </LinearLayout>
                 </LinearLayout>
 
-                <ImageView
-                    android:layout_width="0.1dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginBottom="9dp"
-                    android:layout_marginTop="9dp"
-                    android:background="@color/white_bg" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="5dp"
-                        android:textColor="@color/white_bg"
-                        android:textSize="15sp"
-                        android:textStyle="bold"
-                        tools:text="30"
-                        android:id="@+id/user_buzz_text" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/white_bg"
-                        android:textSize="15sp"
-                        tools:text="人气"
-                        android:text="人气" />
-                </LinearLayout>
-            </LinearLayout>
-
-
-        </RelativeLayout>
+            </RelativeLayout>
+        </FrameLayout>
 
         <LinearLayout
             android:id="@+id/user_contribution"
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:background="@color/white_bg"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:background="@color/white_bg"
             android:padding="10dp">
 
             <TextView
@@ -213,16 +220,17 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="0.1dp"
-            android:background="@color/line_color"
             android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"/>
+            android:layout_marginRight="10dp"
+            android:background="@color/line_color" />
+
         <LinearLayout
             android:id="@+id/user_myVideo"
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:background="@color/white_bg"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:background="@color/white_bg"
             android:padding="10dp">
 
             <TextView
@@ -243,16 +251,17 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="0.1dp"
-            android:background="@color/line_color"
             android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"/>
+            android:layout_marginRight="10dp"
+            android:background="@color/line_color" />
+
         <LinearLayout
             android:id="@+id/user_myNews"
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:background="@color/white_bg"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:background="@color/white_bg"
             android:padding="10dp">
 
             <TextView
@@ -273,16 +282,17 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="0.1dp"
-            android:background="@color/line_color"
             android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"/>
+            android:layout_marginRight="10dp"
+            android:background="@color/line_color" />
+
         <LinearLayout
             android:id="@+id/user_myEnergy"
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:background="@color/white_bg"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:background="@color/white_bg"
             android:padding="10dp">
 
             <TextView
@@ -298,25 +308,25 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="right"
                 android:drawableRight="@mipmap/right"
+                android:gravity="right|center_vertical"
                 android:textColor="@color/textColor6"
-                tools:text="1221432"
-                android:gravity="right|center_vertical" />
+                tools:text="1221432" />
         </LinearLayout>
 
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="0.1dp"
-            android:background="@color/line_color"
             android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"/>
+            android:layout_marginRight="10dp"
+            android:background="@color/line_color" />
 
         <LinearLayout
             android:id="@+id/user_mycalorie"
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:background="@color/white_bg"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:background="@color/white_bg"
             android:padding="10dp">
 
             <TextView
@@ -332,25 +342,25 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="right"
                 android:drawableRight="@mipmap/right"
+                android:gravity="right|center_vertical"
                 android:textColor="@color/textColor6"
-                tools:text="3423"
-                android:gravity="right|center_vertical" />
+                tools:text="3423" />
         </LinearLayout>
 
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="0.1dp"
-            android:background="@color/line_color"
             android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"/>
+            android:layout_marginRight="10dp"
+            android:background="@color/line_color" />
 
         <LinearLayout
             android:id="@+id/user_myBill"
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:background="@color/white_bg"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:background="@color/white_bg"
             android:padding="10dp">
 
             <TextView
@@ -365,24 +375,24 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="right"
                 android:drawableRight="@mipmap/right"
-                android:textColor="@color/textColor6"
-                android:gravity="right|center_vertical" />
+                android:gravity="right|center_vertical"
+                android:textColor="@color/textColor6" />
         </LinearLayout>
 
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="0.1dp"
-            android:background="@color/line_color"
             android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"/>
+            android:layout_marginRight="10dp"
+            android:background="@color/line_color" />
 
         <LinearLayout
             android:id="@+id/user_myQuestion"
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:background="@color/white_bg"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:background="@color/white_bg"
             android:padding="10dp">
 
             <TextView
@@ -397,25 +407,25 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="right"
                 android:drawableRight="@mipmap/right"
-                android:textColor="@color/textColor6"
-                android:gravity="right|center_vertical" />
+                android:gravity="right|center_vertical"
+                android:textColor="@color/textColor6" />
         </LinearLayout>
 
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="0.1dp"
-            android:background="@color/line_color"
             android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"/>
+            android:layout_marginRight="10dp"
+            android:background="@color/line_color" />
 
         <LinearLayout
             android:id="@+id/user_caishen"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
             android:layout_marginTop="10dp"
             android:background="@color/white_bg"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
             android:padding="10dp">
 
             <TextView
@@ -430,27 +440,27 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="right"
                 android:drawableRight="@mipmap/right"
-                android:textColor="@color/textColor3"
+                android:gravity="right|center_vertical"
                 android:text="@string/user_txt8_1"
-                android:gravity="right|center_vertical" />
+                android:textColor="@color/textColor3" />
         </LinearLayout>
 
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="0.1dp"
-            android:background="@color/line_color"
             android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"/>
+            android:layout_marginRight="10dp"
+            android:background="@color/line_color" />
 
         <LinearLayout
             android:id="@+id/user_setting"
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/white_bg"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:background="@color/white_bg"
             android:padding="10dp">
 
             <TextView
@@ -465,8 +475,8 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="right"
                 android:drawableRight="@mipmap/right"
-                android:textColor="@color/textColor3"
-                android:gravity="right|center_vertical" />
+                android:gravity="right|center_vertical"
+                android:textColor="@color/textColor3" />
         </LinearLayout>
 
     </LinearLayout>

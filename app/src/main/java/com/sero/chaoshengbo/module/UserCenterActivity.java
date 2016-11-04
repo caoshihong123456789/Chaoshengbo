@@ -1,7 +1,11 @@
 package com.sero.chaoshengbo.module;
 
 import android.app.Fragment;
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,10 +15,13 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.SimpleTarget;
 import com.sero.chaoshengbo.NetUtil.BaseApi;
 import com.sero.chaoshengbo.NetUtil.BaseSubscriber;
 import com.sero.chaoshengbo.NetUtil.NetUtil;
 import com.sero.chaoshengbo.R;
+import com.sero.chaoshengbo.Util.BitmapBlurUtil;
 import com.sero.chaoshengbo.Util.GlideCircleTransform;
 import com.sero.chaoshengbo.javabean.BaseResponseBean;
 import com.sero.chaoshengbo.model.UserInfo;
@@ -73,6 +80,8 @@ public class UserCenterActivity extends BaseFragment {
     TextView userFollowText;
     @Bind(R.id.user_buzz_text)
     TextView userBuzzText;
+    @Bind(R.id.user_avator_bg)
+    ImageView userAvatorBg;
 
     public static Fragment newInstance() {
         UserCenterActivity fragment = new UserCenterActivity();
@@ -127,17 +136,34 @@ public class UserCenterActivity extends BaseFragment {
         Glide.with(this.getActivity()).load(info.getUser_avatar())
                 .transform(new GlideCircleTransform(getActivity()))
                 .into(userAvator);
+
+        Glide.with(this.getActivity()).load(info.getUser_avatar())
+                .asBitmap().into(new SimpleTarget<Bitmap>() {
+            @Override
+            public void onResourceReady(Bitmap bitmap, GlideAnimation<? super Bitmap> glideAnimation) {
+                BitmapBlurUtil.addTask(bitmap, new Handler() {
+                    @Override
+                    public void handleMessage(Message msg) {
+                        super.handleMessage(msg);
+                        userAvatorBg.setImageResource(R.drawable.shape_mongolia);
+                        userAvatorBg.setBackgroundDrawable((Drawable) msg.obj);
+                    }
+                });
+            }
+        });
         userName.setText(info.getUser_name());
         userLocation.setText(info.getUser_location());
         userIntro.setText(info.getIntroduce());
         if (info.getUser_sex().equals("男")) {
-            userName.setCompoundDrawables(null, null, getResources().getDrawable(R.mipmap.img_boy), null);
+            userName.setCompoundDrawablesWithIntrinsicBounds(null, null, getResources().getDrawable(R.mipmap.img_boy), null);
         } else {
-            userName.setCompoundDrawables(null, null, getResources().getDrawable(R.mipmap.img_girl), null);
+            userName.setCompoundDrawablesWithIntrinsicBounds(null, null, getResources().getDrawable(R.mipmap.img_girl), null);
         }
         userAttentionText.setText(info.getConcern_count());
         userFollowText.setText(info.getFollower_count());
         userBuzzText.setText(info.getLikes());
+        textMyEnergy.setText(info.getEnergy_balance());
+        textCalorie.setText(info.getCalorie_balance());
 
     }
 }

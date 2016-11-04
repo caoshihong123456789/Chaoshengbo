@@ -78,10 +78,10 @@ public class LiveAdapter extends RecyclerView.Adapter {
             holder1.liveTitle.setText(bean.getLives().get(position).getTitle());
             switch (bean.getLives().get(position).getUser().getUser_sex()) {
                 case "男":
-                    holder1.liveName.setCompoundDrawables(null, null, context.getResources().getDrawable(R.mipmap.img_boy), null);
+                    holder1.liveName.setCompoundDrawablesWithIntrinsicBounds(null, null, context.getResources().getDrawable(R.mipmap.img_boy), null);
                     break;
                 case "女":
-                    holder1.liveName.setCompoundDrawables(null, null, context.getResources().getDrawable(R.mipmap.img_girl), null);
+                    holder1.liveName.setCompoundDrawablesWithIntrinsicBounds(null, null, context.getResources().getDrawable(R.mipmap.img_girl), null);
                     break;
             }
 
