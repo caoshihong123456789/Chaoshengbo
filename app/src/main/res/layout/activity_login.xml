@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@mipmap/login_bg"
-    tools:context="com.sero.chaoshengbo.module.LoginActivity">
+    tools:context="com.zuilot.chaoshengbo.module.LoginActivity">
 
     <Button
         android:id="@+id/login_back"

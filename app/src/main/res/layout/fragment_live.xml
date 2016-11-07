@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.sero.chaoshengbo.module.LiveActivity">
+    tools:context="com.zuilot.chaoshengbo.module.LiveActivity">
 
     <include layout="@layout/viewpager_collspaningtoolbar_layout" />
 

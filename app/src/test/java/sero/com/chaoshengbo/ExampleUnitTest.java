@@ -1,4 +1,4 @@
-package com.sero.chaoshengbo;
+package com.zuilot.chaoshengbo;
 
 import org.junit.Test;
 

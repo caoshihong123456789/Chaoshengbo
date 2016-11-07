@@ -7,20 +7,20 @@ android {
 
     signingConfigs {
         liaoqiubarelease {
-            storeFile file('zlc.jks')
+            storeFile file('E:\\RXandroid\\zlc.jks')
             keyAlias 'liaoqiubaAPP'
             keyPassword 'liaoqiubaAPPQwer1234'
             storePassword 'liaoqiubaQwer1234'
         }
         debug {
-            storeFile file("zlc.jks")
+            storeFile file("E:\\RXandroid\\zlc.jks")
             keyAlias "liaoqiubaAPP"
             keyPassword "liaoqiubaAPPQwer1234"
             storePassword "liaoqiubaQwer1234"
         }
     }
     defaultConfig {
-        applicationId "com.sero.chaoshengbo"
+        applicationId "com.zuilot.chaoshengbo"
         minSdkVersion 14
         targetSdkVersion 23
         versionCode 1
@@ -47,7 +47,7 @@ android {
         _360 {}
         xiaomi {}
         productFlavors.all {
-            flavor -> flavor.manifestPlaceholders = [UMENGCHANNEL: name]
+            flavor -> flavor.manifestPlaceholders = [UMENG_CHANNEL_VALUE: name]
         }
     }
 }
@@ -76,4 +76,5 @@ dependencies {
     compile 'com.squareup.okhttp3:logging-interceptor:3.3.1'
     compile 'com.github.bumptech.glide:glide:3.7.0'
     testCompile 'junit:junit:4.12'
+    compile 'com.umeng.analytics:analytics:latest.integration'
 }

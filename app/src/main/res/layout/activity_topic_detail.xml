@@ -8,7 +8,7 @@
     android:fitsSystemWindows="true"
     android:clipToPadding="false"
 
-    tools:context="com.sero.chaoshengbo.module.TopicDetailActivity"
+    tools:context="com.zuilot.chaoshengbo.module.TopicDetailActivity"
     >
 
 
