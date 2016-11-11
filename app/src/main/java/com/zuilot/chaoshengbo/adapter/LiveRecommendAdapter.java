@@ -6,12 +6,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.zuilot.chaoshengbo.R;
 import com.zuilot.chaoshengbo.Util.GlideCircleTransform;
 import com.zuilot.chaoshengbo.javabean.LiveActivityRecommendedBean;
+import com.zuilot.chaoshengbo.module.PlaybackActivity;
 
 import java.util.List;
 
@@ -55,13 +57,18 @@ public class LiveRecommendAdapter extends RecyclerView.Adapter {
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         ViewHolder viewHolder=(ViewHolder)holder;
-//        viewHolder.liveRecommendImg
         Glide.with(context).load(list.get(position).getUser_avatar())
                 .transform(new GlideCircleTransform(context))
                 .into(viewHolder.liveRecommendImg);
         viewHolder.liveRecommendText.setText(list.get(position).getUser_name());
+        viewHolder.liveRecommendLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PlaybackActivity.intoPlayBack(context,list.get(position).getLive());
+            }
+        });
     }
 
     @Override
@@ -75,6 +82,8 @@ public class LiveRecommendAdapter extends RecyclerView.Adapter {
         ImageView liveRecommendImg;
         @Bind(R.id.live_recommend_text)
         TextView liveRecommendText;
+        @Bind(R.id.live_recommend_layout)
+        LinearLayout liveRecommendLayout;
 
         ViewHolder(View view) {
             super(view);

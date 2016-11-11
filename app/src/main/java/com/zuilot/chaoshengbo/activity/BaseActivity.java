@@ -18,7 +18,6 @@ public class BaseActivity extends AppCompatActivity {
             intent.putExtra("str"+i,strings[i]);
         }
         context.startActivity(intent);
-
     }
     public void onResume() {
         super.onResume();

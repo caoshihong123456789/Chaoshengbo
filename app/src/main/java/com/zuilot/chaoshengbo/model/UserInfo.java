@@ -1,12 +1,14 @@
 package com.zuilot.chaoshengbo.model;
 
+import java.io.Serializable;
+
 /**
  * Created by caoshihong on 2016/10/27.
  *
  * 用户消息
  */
 
-public class UserInfo {
+public class UserInfo implements Serializable{
 
     private String user_id; //
     private String user_sex; //

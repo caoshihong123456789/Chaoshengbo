@@ -43,7 +43,9 @@ android {
         }
     }
     productFlavors {
-        chaoshengbo {}
+        chaoshengbo {
+            applicationId "com.sero.chaoshengbo"
+        }
         _360 {}
         xiaomi {}
         productFlavors.all {
@@ -77,4 +79,9 @@ dependencies {
     compile 'com.github.bumptech.glide:glide:3.7.0'
     testCompile 'junit:junit:4.12'
     compile 'com.umeng.analytics:analytics:latest.integration'
+
+    /*七牛播放器*/
+    compile 'com.qiniu.pili:pili-android-qos:0.8.+'
+    compile 'com.qiniu:happy-dns:0.2.+'
+    /*七牛播放器*/
 }

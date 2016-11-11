@@ -14,6 +14,7 @@ import com.bumptech.glide.Glide;
 import com.zuilot.chaoshengbo.R;
 import com.zuilot.chaoshengbo.Util.GlideCircleTransform;
 import com.zuilot.chaoshengbo.javabean.LiveActivityBean;
+import com.zuilot.chaoshengbo.module.PlaybackActivity;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -58,18 +59,23 @@ public class LiveAdapter extends RecyclerView.Adapter {
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        if(holder instanceof ViewHolder0){
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
+        if (holder instanceof ViewHolder0) {
             ViewHolder0 holder1 = (ViewHolder0) holder;
-            LinearLayoutManager linearLayoutManager=new LinearLayoutManager(context);
+            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context);
             linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
             holder1.recomendRecyclerview.setLayoutManager(linearLayoutManager);
-            LiveRecommendAdapter adapter=new LiveRecommendAdapter(context,bean.getRecommondLives());
+            LiveRecommendAdapter adapter = new LiveRecommendAdapter(context, bean.getRecommondLives());
             holder1.recomendRecyclerview.setAdapter(adapter);
 
-        }else{
+        } else {
             ViewHolder holder1 = (ViewHolder) holder;
-
+            holder1.liveRelative.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    PlaybackActivity.intoPlayBack(context,bean.getLives().get(position));
+                }
+            });
             Glide.with(context).load(bean.getLives().get(position).getUser().getUser_avatar()).transform(new GlideCircleTransform(context)).into(holder1.liveAvatar);
             Glide.with(context).load(bean.getLives().get(position).getUser().getLiveimgurl()).into(holder1.liveImage);
             holder1.liveLocation.setText(bean.getLives().get(position).getUser().getUser_location());
@@ -123,11 +129,14 @@ public class LiveAdapter extends RecyclerView.Adapter {
         ImageView liveImage;
         @Bind(R.id.live_status)
         ImageView liveStatus;
+        @Bind(R.id.live_relative)
+        RelativeLayout liveRelative;
 
         public ViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);
         }
+
     }
 
     static class ViewHolder0 extends RecyclerView.ViewHolder {
@@ -139,4 +148,5 @@ public class LiveAdapter extends RecyclerView.Adapter {
             ButterKnife.bind(this, view);
         }
     }
+
 }

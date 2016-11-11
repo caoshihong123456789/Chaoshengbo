@@ -3,6 +3,7 @@ package com.zuilot.chaoshengbo.javabean;
 import com.zuilot.chaoshengbo.model.LiveModel;
 import com.zuilot.chaoshengbo.model.UserInfo;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -12,7 +13,7 @@ import java.util.List;
  *
  */
 
-public class LiveActivityRecommendedBean {
+public class LiveActivityRecommendedBean implements Serializable{
 
     private int count;
     private List<myUserInfoBean> list;
@@ -33,7 +34,7 @@ public class LiveActivityRecommendedBean {
         this.list = bean;
     }
 
-    public class myUserInfoBean extends UserInfo{
+    public class myUserInfoBean extends UserInfo {
         private LiveModel live;
 
         public LiveModel getLive() {

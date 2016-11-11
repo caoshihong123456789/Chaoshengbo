@@ -1,12 +1,14 @@
 package com.zuilot.chaoshengbo.model;
 
+import java.io.Serializable;
+
 /**
  * Created by caoshihong on 2016/10/27.
  *
  * 回放 model
  */
 
-public class PlayBackModel {
+public class PlayBackModel implements Serializable {
     private String id;//live表id、live_id，房间id
     private String title;//标题
     private String user_id;//主播用户id

@@ -1,12 +1,14 @@
 package com.zuilot.chaoshengbo.model;
 
+import java.io.Serializable;
+
 /**
  * Created by caoshihong on 2016/10/27.
  *
  * 首页--咨询model
  */
 
-public class InfoModel {
+public class InfoModel  implements Serializable {
 
     private String id;      //	int	资讯id
     private String title;   //	varchar	标题

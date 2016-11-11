@@ -23,4 +23,7 @@
         <item name="android:windowTranslucentStatus" tools:targetApi="kitkat">true</item>
     </style>
 
+    <style name="livingStyle" parent="AppTheme">
+        <item name="android:keepScreenOn">true</item>
+    </style>
 </resources>

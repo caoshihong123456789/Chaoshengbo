@@ -1,12 +1,14 @@
 package com.zuilot.chaoshengbo.model;
 
+import java.io.Serializable;
+
 /**
  * Created by caoshihong on 2016/10/27.
  *
  * 首页轮播  carousel_meta
  */
 
-public class CarouselModel {
+public class CarouselModel  implements Serializable {
 
     private String id; //
     private String title; //

@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_playback"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    tools:context="com.zuilot.chaoshengbo.module.PlaybackActivity">
+
+    <com.pili.pldroid.player.widget.PLVideoTextureView
+        android:id="@+id/playback_VideoView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true" />
+
+    <LinearLayout
+        android:id="@+id/playback_user_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="-5dp"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:background="@drawable/hollow_side_shape"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingBottom="7dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="7dp">
+
+        <ImageView
+            android:id="@+id/playback_user_img"
+            android:layout_width="34dp"
+            android:layout_height="34dp"
+            android:layout_marginRight="4dp"
+            android:src="@mipmap/ic_launcher" />
+
+        <TextView
+            android:id="@+id/playback_user_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxEms="6"
+            android:singleLine="true"
+            android:textColor="@color/white_bg"
+            tools:text="中超颁奖典礼" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/playback_attention"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/playback_user_layout"
+        android:layout_alignTop="@id/playback_user_layout"
+        android:layout_marginLeft="-3dp"
+        android:layout_toRightOf="@id/playback_user_layout"
+        android:background="@color/white_bg"
+        android:text="@string/playback_attention"
+        android:textColor="@color/textColor6"
+        android:textSize="18dp" />
+
+    <ImageView
+        android:id="@+id/playback_close"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/playback_user_layout"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@id/playback_user_layout"
+        android:layout_marginRight="20dp"
+        android:src="@mipmap/close1" />
+
+    <LinearLayout
+        android:id="@+id/playback_calories_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/playback_user_layout"
+        android:layout_marginLeft="-5dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/hollow_side_shape"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/playback_carlories"
+            android:textColor="@color/textColor6"
+            android:textSize="11sp" />
+
+        <TextView
+            android:id="@+id/playback_calories_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableRight="@mipmap/live_right_arrows"
+            android:text="@string/playback_carlories"
+            android:textColor="@color/white_bg"
+            android:textSize="11sp" />
+
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/playback_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/playback_calories_layout"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/tran_white_bg"
+        tools:text="中超颁奖典礼" />
+
+    <include
+        layout="@layout/playback_controll_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true" />
+
+    <ProgressBar
+        android:id="@+id/playback_progressbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginRight="5dp" />
+
+</RelativeLayout>

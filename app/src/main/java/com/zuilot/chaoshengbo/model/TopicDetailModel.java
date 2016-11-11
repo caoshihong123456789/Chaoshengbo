@@ -2,6 +2,9 @@
  * Copyright 2016
  */
 package com.zuilot.chaoshengbo.model;
+
+import java.io.Serializable;
+
 /**
  * Auto-generated: 2016-10-24 11:29:17
  *
@@ -10,7 +13,7 @@ package com.zuilot.chaoshengbo.model;
  *
  * 专题详情页
  */
-public class TopicDetailModel {
+public class TopicDetailModel  implements Serializable {
 
     private String id;
     private String fid;

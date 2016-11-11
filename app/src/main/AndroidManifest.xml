@@ -19,8 +19,7 @@
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.USE_CREDENTIALS" />
     <uses-permission android:name="android.permission.MANAGE_ACCOUNTS" />
-
-
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <application
         android:name=".activity.MApplication"
@@ -60,7 +59,10 @@
             android:name="UMENG_CHANNEL"
             android:value="${UMENG_CHANNEL_VALUE}" />
 
-        <activity android:name=".activity.WebViewActivity"></activity>
+        <activity android:name=".activity.WebViewActivity" />
+        <activity
+            android:name=".module.PlaybackActivity"
+            android:theme="@style/livingStyle"></activity>
     </application>
 
 </manifest>

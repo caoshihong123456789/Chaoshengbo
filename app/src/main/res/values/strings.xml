@@ -24,4 +24,11 @@
     <string name="login_type">请选择登录方式</string>
     <string name="login_agreement">我已同意并阅读<u>超声播用户协议</u></string>
     <!--登陆-->
+
+
+    <!--直播-->
+    <string name="playback_attention">关注</string>
+    <string name="playback_attention_off">已关注</string>
+    <string name="playback_carlories">卡路里：</string>
+    <!--直播-->
 </resources>

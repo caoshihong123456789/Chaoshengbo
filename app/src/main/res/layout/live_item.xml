@@ -5,6 +5,7 @@
     android:layout_marginTop="10dp"
     android:layout_height="480dp"
     android:background="@color/white_bg"
+    android:id="@+id/live_relative"
     >
 
     <RelativeLayout
