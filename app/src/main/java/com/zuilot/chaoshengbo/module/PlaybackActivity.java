@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.pili.pldroid.player.PLMediaPlayer;
@@ -195,40 +196,28 @@ public class PlaybackActivity extends BaseActivity {
 
                 @Override
                 public void onNext(PLMediaPlayer mediaPlayer) {
-                    LogUtil.e("---观察者log "+mediaPlayer.getCurrentPosition()+"--"+mediaPlayer.getDuration());
-                    if(mediaPlayer.getDuration() > 0){
-                        long str=1000L * mediaPlayer.getCurrentPosition() / mediaPlayer.getDuration();
-                        playbackTime.setText("-"+playUtil.generateTime(mediaPlayer.getDuration()- mediaPlayer.getCurrentPosition()));
-                        playbackSeekbar.setProgress((int)str);
-                        LogUtil.e("---输出seekbar当前进度==="+str);
-                    }else{
+                    if(mediaPlayer != null){
+                        LogUtil.e("---观察者log "+mediaPlayer.isPlaying()+"--"+mediaPlayer.isLooping());
+//                    if(mediaPlayer.isPlaying()){
+                        if(mediaPlayer.getDuration() > 0){
+                            long str=1000L * mediaPlayer.getCurrentPosition() / mediaPlayer.getDuration();
+                            playbackTime.setText("-"+playUtil.generateTime(mediaPlayer.getDuration()- mediaPlayer.getCurrentPosition()));
+                            playbackSeekbar.setProgress((int)str);
+                            LogUtil.e("---输出seekbar当前进度==="+str);
+                        }else{
 //                    playbackTime.setText("-00:00");
+                        }
+//                    }
                     }
+
                 }
             };
         }
         return getCurrentPositionSubscriber;
     }
-
-    public Subscriber<String> getStopSubscriber(){
-        return new Subscriber<String>() {
-            @Override
-            public void onCompleted() {
-
-            }
-
-            @Override
-            public void onError(Throwable e) {
-
-            }
-
-            @Override
-            public void onNext(String s) {
-
-            }
-        };
+    public void setGetCurrentPositionSubscriber(){
+        getCurrentPositionSubscriber=null;
     }
-
 
 
     @OnClick({R.id.playback_user_layout, R.id.playback_attention, R.id.playback_close, R.id.playback_calories_layout})
@@ -245,4 +234,17 @@ public class PlaybackActivity extends BaseActivity {
                 break;
         }
     }
+
+    private SeekBar.OnSeekBarChangeListener mSeekListener = new SeekBar.OnSeekBarChangeListener() {
+
+        public void onStartTrackingTouch(SeekBar bar) {
+
+        }
+
+        public void onProgressChanged(SeekBar bar, int progress, boolean fromuser) {
+        }
+
+        public void onStopTrackingTouch(SeekBar bar) {
+        }
+    };
 }

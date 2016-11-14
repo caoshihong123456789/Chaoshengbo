@@ -20,8 +20,8 @@ import rx.functions.Func1;
  * Created by caoshihong on 2016/11/8.
  * <p>
  * 回放页面相关配置util
- *
- *在本页面实现监听视频进度 并且显示出来
+ * <p>
+ * 在本页面实现监听视频进度 并且显示出来
  */
 
 public class PlaybackUtil implements
@@ -29,8 +29,8 @@ public class PlaybackUtil implements
         PLMediaPlayer.OnInfoListener,
         PLMediaPlayer.OnCompletionListener,
         PLMediaPlayer.OnVideoSizeChangedListener,
-        PLMediaPlayer.OnErrorListener ,
-        PLMediaPlayer.OnBufferingUpdateListener{
+        PLMediaPlayer.OnErrorListener,
+        PLMediaPlayer.OnBufferingUpdateListener {
 
     /*AVOptions	用于配置播放器参数，包括：超时时间、软硬件编解码*/
     private AVOptions avOptions;
@@ -47,6 +47,7 @@ public class PlaybackUtil implements
     public long getCurrentPosition() {
         return currentPosition;
     }
+
     public AVOptions getAVOptions(PlaybackActivity context) {
         this.context = context;
         if (avOptions == null) {
@@ -77,15 +78,15 @@ public class PlaybackUtil implements
 
     @Override
     public void onCompletion(PLMediaPlayer plMediaPlayer) {
-        Log.e("playbackUtil:"+plMediaPlayer.getCurrentPosition(),"onCompletion："+plMediaPlayer.getDuration());
-        currentPosition=plMediaPlayer.getCurrentPosition();
+        Log.e("playbackUtil:" + plMediaPlayer.getCurrentPosition(), "onCompletion：" + plMediaPlayer.getDuration());
+        currentPosition = plMediaPlayer.getCurrentPosition();
         sendReconnectMessage();
     }
 
     @Override
     public boolean onError(PLMediaPlayer plMediaPlayer, int errorCode) {
         boolean isNeedReconnect = false;
-        LogUtil.e("---"+errorCode);
+        LogUtil.e("---" + errorCode);
         switch (errorCode) {
             case PLMediaPlayer.ERROR_CODE_INVALID_URI:
                 showToastTips("Invalid URL !");
@@ -141,45 +142,55 @@ public class PlaybackUtil implements
 
     @Override
     public boolean onInfo(PLMediaPlayer plMediaPlayer, int i, int i1) {
-        LogUtil.e(i1+"onInfo:"+i);
-        if(mediaPlayer==null){
-            this.mediaPlayer=plMediaPlayer;
+        LogUtil.e(i1 + "onInfo:" + i);
+        if (mediaPlayer == null) {
+            this.mediaPlayer = plMediaPlayer;
         }
-        if(i == 3){
-            LogUtil.e("重新绑定观察者 和被观察者");
-            getCurrentObservable()
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(context.getCurrentSubscriber());
+        if (i == 10003) {
+            LogUtil.e("重新绑定观察者 和被观察者"+mediaPlayer.isPlaying());
+            getCurrentObservable();
+
         }
         return false;
     }
 
-    private Observable<PLMediaPlayer> getCurrentObservable(){
-        if(currentPostionObservable == null){
-             currentPostionObservable=Observable.interval(1,TimeUnit.SECONDS).map(new Func1<Long, PLMediaPlayer>() {
-                 @Override
-                 public PLMediaPlayer call(Long aLong) {
-                     LogUtil.e("被观察者--"+mediaPlayer);
-                     return mediaPlayer;
-                 }
-             });
+    private Observable<PLMediaPlayer> getCurrentObservable() {
+        if (currentPostionObservable == null) {
+            currentPostionObservable = Observable.interval(1, TimeUnit.SECONDS)
+                    .filter(new Func1<Long, Boolean>() {
+                        @Override
+                        public Boolean call(Long aLong) {
+//                            LogUtil.e("输出是否可以播放视频", "--" + mediaPlayer.isPlaying());
+                            return mediaPlayer !=null && mediaPlayer.isPlaying();
+                        }
+                    })
+                    .map(new Func1<Long, PLMediaPlayer>() {
+                        @Override
+                        public PLMediaPlayer call(Long aLong) {
+                            LogUtil.e("被观察者--" + mediaPlayer);
+                            return mediaPlayer;
+                        }
+                    });
+            currentPostionObservable.observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(context.getCurrentSubscriber());
         }
         return currentPostionObservable;
     }
 
+
     @Override
     public void onPrepared(PLMediaPlayer plMediaPlayer) {
-        LogUtil.e("onPrepared:"+plMediaPlayer);
+        LogUtil.e("onPrepared:" + plMediaPlayer);
     }
 
     @Override
     public void onVideoSizeChanged(PLMediaPlayer plMediaPlayer, int i, int i1) {
-        LogUtil.e(i1+"onVideoSizeChanged:"+i);
+        LogUtil.e(i1 + "onVideoSizeChanged:" + i);
     }
 
     @Override
     public void onBufferingUpdate(PLMediaPlayer plMediaPlayer, int i) {
-        LogUtil.e("onBufferingUpdate:"+i);
+        LogUtil.e("onBufferingUpdate:" + i);
     }
 
     private void showToastTips(final String tips) {
@@ -188,7 +199,7 @@ public class PlaybackUtil implements
                 .subscribe(new Action1<String>() {
                     @Override
                     public void call(String s) {
-                        LogUtil.e("---showToastTips","---"+s);
+                        LogUtil.e("---showToastTips", "---" + s);
                         if (mToast != null) {
                             mToast.cancel();
                         }
@@ -200,14 +211,16 @@ public class PlaybackUtil implements
 
     private void sendReconnectMessage() {
         showToastTips("正在重连...");
-        context.getCurrentSubscriber().unsubscribe();
+        currentPosition=mediaPlayer.getCurrentPosition();
+        LogUtil.e("重连过程中输出当前进度："+currentPosition);
+        mediaPlayer=null;
         Observable.just("正在重连")
                 .timer(5, TimeUnit.SECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(context.getSubscriber());
     }
 
-    public  String generateTime(long position) {
+    public String generateTime(long position) {
         int totalSeconds = (int) (position / 1000);
 
         int seconds = totalSeconds % 60;
@@ -223,15 +236,15 @@ public class PlaybackUtil implements
         }
     }
 
-    public void onPause(){
+    public void onPause() {
         context.getCurrentSubscriber().unsubscribe();
     }
 
-    public void onResume(){
+    public void onResume() {
 
     }
 
-    public void onDestroy(){
+    public void onDestroy() {
         context.getCurrentSubscriber().unsubscribe();
     }
 
