@@ -13,10 +13,11 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.pili.pldroid.player.PLMediaPlayer;
 import com.pili.pldroid.player.widget.PLVideoTextureView;
 import com.pili.pldroid.player.widget.PLVideoView;
 import com.zuilot.chaoshengbo.R;
-import com.zuilot.chaoshengbo.Util.MmediaController2;
+import com.zuilot.chaoshengbo.Util.LogUtil;
 import com.zuilot.chaoshengbo.Util.NetWorkUtil;
 import com.zuilot.chaoshengbo.Util.PlaybackUtil;
 import com.zuilot.chaoshengbo.activity.BaseActivity;
@@ -25,6 +26,7 @@ import com.zuilot.chaoshengbo.model.LiveModel;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import rx.Subscriber;
 import rx.functions.Action1;
 
 public class PlaybackActivity extends BaseActivity {
@@ -69,7 +71,7 @@ public class PlaybackActivity extends BaseActivity {
     private LiveModel liveModel;
     private PlaybackUtil playUtil;
     private boolean mIsActivityPaused;//当前界面是否还在
-    private MmediaController2 mMediaController;
+    private Subscriber<PLMediaPlayer> getCurrentPositionSubscriber;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,9 +107,6 @@ public class PlaybackActivity extends BaseActivity {
     }*/
 
     private void initPlayerView() {
-        //设置播放控制器
-        mMediaController = new MmediaController2(this);
-        playbackVideoView.setMediaController(mMediaController);
         //设置加载动画
         playbackVideoView.setBufferingIndicator(playbackProgressbar);
         //设置播放器参数
@@ -137,6 +136,7 @@ public class PlaybackActivity extends BaseActivity {
     @Override
     public void onPause() {
         super.onPause();
+        playUtil.onPause();
         playbackVideoView.pause();
         mIsActivityPaused = false;
     }
@@ -145,6 +145,7 @@ public class PlaybackActivity extends BaseActivity {
     @Override
     public void onResume() {
         super.onResume();
+        playUtil.onResume();
         playbackVideoView.start();
         mIsActivityPaused = true;
     }
@@ -153,6 +154,7 @@ public class PlaybackActivity extends BaseActivity {
     @Override
     public void onDestroy() {
         super.onDestroy();
+        playUtil.onDestroy();
         playbackVideoView.stopPlayback();
     }
 
@@ -173,6 +175,61 @@ public class PlaybackActivity extends BaseActivity {
             }
         };
     }
+
+    /**
+     * 获得改变ui的observable，每秒钟都要调用以在播放视频时更改进度条
+     * @return 根据long类型的参数 改变ui 如果参数为负数证明停止
+     */
+    public Subscriber<PLMediaPlayer> getCurrentSubscriber(){
+        if(getCurrentPositionSubscriber == null ){
+            getCurrentPositionSubscriber= new Subscriber<PLMediaPlayer>(){
+                @Override
+                public void onCompleted() {
+                    LogUtil.e("onCompleted");
+                }
+
+                @Override
+                public void onError(Throwable e) {
+                    LogUtil.e("输出seekbar当前进度--onError",e.getMessage());
+                }
+
+                @Override
+                public void onNext(PLMediaPlayer mediaPlayer) {
+                    LogUtil.e("---观察者log "+mediaPlayer.getCurrentPosition()+"--"+mediaPlayer.getDuration());
+                    if(mediaPlayer.getDuration() > 0){
+                        long str=1000L * mediaPlayer.getCurrentPosition() / mediaPlayer.getDuration();
+                        playbackTime.setText("-"+playUtil.generateTime(mediaPlayer.getDuration()- mediaPlayer.getCurrentPosition()));
+                        playbackSeekbar.setProgress((int)str);
+                        LogUtil.e("---输出seekbar当前进度==="+str);
+                    }else{
+//                    playbackTime.setText("-00:00");
+                    }
+                }
+            };
+        }
+        return getCurrentPositionSubscriber;
+    }
+
+    public Subscriber<String> getStopSubscriber(){
+        return new Subscriber<String>() {
+            @Override
+            public void onCompleted() {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onNext(String s) {
+
+            }
+        };
+    }
+
+
 
     @OnClick({R.id.playback_user_layout, R.id.playback_attention, R.id.playback_close, R.id.playback_calories_layout})
     public void onClick(View view) {
