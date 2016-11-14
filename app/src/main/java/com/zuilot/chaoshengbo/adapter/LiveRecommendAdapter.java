@@ -66,7 +66,7 @@ public class LiveRecommendAdapter extends RecyclerView.Adapter {
         viewHolder.liveRecommendLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                PlaybackActivity.intoPlayBack(context,list.get(position).getLive());
+                PlaybackActivity.intoPlayBack(context,list.get(position));
             }
         });
     }

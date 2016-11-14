@@ -73,7 +73,7 @@ public class LiveAdapter extends RecyclerView.Adapter {
             holder1.liveRelative.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    PlaybackActivity.intoPlayBack(context,bean.getLives().get(position));
+                    PlaybackActivity.intoPlayBackWithLiveModel(context,bean.getLives().get(position));
                 }
             });
             Glide.with(context).load(bean.getLives().get(position).getUser().getUser_avatar()).transform(new GlideCircleTransform(context)).into(holder1.liveAvatar);

@@ -1,7 +1,6 @@
 package com.zuilot.chaoshengbo.Util;
 
 import android.app.Activity;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.pili.pldroid.player.AVOptions;
@@ -39,6 +38,12 @@ public class PlaybackUtil implements
     private long currentPosition;
     private PLMediaPlayer mediaPlayer;
     private static Observable<PLMediaPlayer> currentPostionObservable;
+    private boolean isSeekBarTouch=false;
+
+
+    public void setSeekBarTouch(boolean seekBarTouch) {
+        isSeekBarTouch = seekBarTouch;
+    }
 
     public PLMediaPlayer getMediaPlayer() {
         return mediaPlayer;
@@ -78,9 +83,15 @@ public class PlaybackUtil implements
 
     @Override
     public void onCompletion(PLMediaPlayer plMediaPlayer) {
-        Log.e("playbackUtil:" + plMediaPlayer.getCurrentPosition(), "onCompletion：" + plMediaPlayer.getDuration());
-        currentPosition = plMediaPlayer.getCurrentPosition();
-        sendReconnectMessage();
+        LogUtil.e("playbackUtil:" + plMediaPlayer.getCurrentPosition(), "onCompletion：" + plMediaPlayer.getDuration());
+        if(plMediaPlayer.getCurrentPosition()+500 > plMediaPlayer.getDuration()){
+            showToastTips("播放完成");
+            onDestroy();
+        }else{
+            currentPosition = plMediaPlayer.getCurrentPosition();
+            sendReconnectMessage();
+        }
+
     }
 
     @Override
@@ -160,8 +171,7 @@ public class PlaybackUtil implements
                     .filter(new Func1<Long, Boolean>() {
                         @Override
                         public Boolean call(Long aLong) {
-//                            LogUtil.e("输出是否可以播放视频", "--" + mediaPlayer.isPlaying());
-                            return mediaPlayer !=null && mediaPlayer.isPlaying();
+                            return !isSeekBarTouch && mediaPlayer !=null && mediaPlayer.isPlaying() ;
                         }
                     })
                     .map(new Func1<Long, PLMediaPlayer>() {
@@ -246,6 +256,13 @@ public class PlaybackUtil implements
 
     public void onDestroy() {
         context.getCurrentSubscriber().unsubscribe();
+        currentPostionObservable=null;
+    }
+
+    public void seekTo(long currentPosition){
+        if(mediaPlayer != null){
+            mediaPlayer.seekTo(mediaPlayer.getDuration() * currentPosition / 1000);
+        }
     }
 
 }

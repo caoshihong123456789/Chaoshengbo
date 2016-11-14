@@ -14,6 +14,7 @@ import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.pili.pldroid.player.PLMediaPlayer;
 import com.pili.pldroid.player.widget.PLVideoTextureView;
 import com.pili.pldroid.player.widget.PLVideoView;
@@ -21,8 +22,11 @@ import com.zuilot.chaoshengbo.R;
 import com.zuilot.chaoshengbo.Util.LogUtil;
 import com.zuilot.chaoshengbo.Util.NetWorkUtil;
 import com.zuilot.chaoshengbo.Util.PlaybackUtil;
+import com.zuilot.chaoshengbo.Util.ToastUtil;
 import com.zuilot.chaoshengbo.activity.BaseActivity;
+import com.zuilot.chaoshengbo.javabean.LiveActivityRecommendedBean;
 import com.zuilot.chaoshengbo.model.LiveModel;
+import com.zuilot.chaoshengbo.model.UserInfo;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -68,8 +72,11 @@ public class PlaybackActivity extends BaseActivity {
     @Bind(R.id.playback_controll_view)
     RelativeLayout playbackControllView;
     private static String ARGUMENT_LIVEMODEL = "playback_liveModel";//回放参数
+    private static String ARGUMENT_USERINFO = "playback_userInfo";//回放参数
 
+    private LiveActivityRecommendedBean.myUserInfoBean myUserInfoBean;
     private LiveModel liveModel;
+    private UserInfo userInfo;
     private PlaybackUtil playUtil;
     private boolean mIsActivityPaused;//当前界面是否还在
     private Subscriber<PLMediaPlayer> getCurrentPositionSubscriber;
@@ -79,35 +86,38 @@ public class PlaybackActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_playback);
         ButterKnife.bind(this);
-        liveModel = (LiveModel) getIntent().getSerializableExtra(ARGUMENT_LIVEMODEL);
+        myUserInfoBean = (LiveActivityRecommendedBean.myUserInfoBean) getIntent().getSerializableExtra(ARGUMENT_USERINFO);
+
+        if (myUserInfoBean == null) {
+            liveModel = (LiveModel) getIntent().getSerializableExtra(ARGUMENT_LIVEMODEL);
+            userInfo = liveModel.getUser();
+        } else {
+            liveModel = myUserInfoBean.getLive();
+            userInfo = myUserInfoBean;
+        }
         playUtil = new PlaybackUtil();
         initPlayerView();
+
     }
 
-    public static void intoPlayBack(Context context, LiveModel bean) {
+    public static void intoPlayBack(Context context, LiveActivityRecommendedBean.myUserInfoBean bean) {
+        Intent intent = new Intent(context, PlaybackActivity.class);
+        intent.putExtra(ARGUMENT_USERINFO, bean);
+        context.startActivity(intent);
+    }
+    public static void intoPlayBackWithLiveModel(Context context, LiveModel bean) {
         Intent intent = new Intent(context, PlaybackActivity.class);
         intent.putExtra(ARGUMENT_LIVEMODEL, bean);
         context.startActivity(intent);
     }
 
-    /*private void initView() {
-        Observable.interval(0, 1000, TimeUnit.SECONDS)
-                .map(new Func1<Long, Long>() {
-                    @Override
-                    public Long call(Long aLong) {
-
-                        return null;
-                    }
-                })
-                .subscribe(new Action1<Long>() {
-                    @Override
-                    public void call(Long aLong) {
-
-                    }
-                });
-    }*/
 
     private void initPlayerView() {
+        playbackSeekbar.setOnSeekBarChangeListener(mSeekListener);
+        Glide.with(this).load(userInfo.getUser_avatar()).into(playbackUserImg);
+        playbackUserTxt.setText(userInfo.getUser_name());
+        playbackCaloriesTxt.setText(userInfo.getCalorie_balance());
+
         //设置加载动画
         playbackVideoView.setBufferingIndicator(playbackProgressbar);
         //设置播放器参数
@@ -131,6 +141,8 @@ public class PlaybackActivity extends BaseActivity {
         //设置播放地址
         playbackVideoView.setVideoPath(liveModel.getPlayback_url());
         playbackVideoView.start();
+
+
     }
 
 
@@ -157,6 +169,7 @@ public class PlaybackActivity extends BaseActivity {
         super.onDestroy();
         playUtil.onDestroy();
         playbackVideoView.stopPlayback();
+        getCurrentPositionSubscriber=null;
     }
 
     public Action1<Long> getSubscriber() {
@@ -198,16 +211,18 @@ public class PlaybackActivity extends BaseActivity {
                 public void onNext(PLMediaPlayer mediaPlayer) {
                     if(mediaPlayer != null){
                         LogUtil.e("---观察者log "+mediaPlayer.isPlaying()+"--"+mediaPlayer.isLooping());
-//                    if(mediaPlayer.isPlaying()){
                         if(mediaPlayer.getDuration() > 0){
                             long str=1000L * mediaPlayer.getCurrentPosition() / mediaPlayer.getDuration();
                             playbackTime.setText("-"+playUtil.generateTime(mediaPlayer.getDuration()- mediaPlayer.getCurrentPosition()));
                             playbackSeekbar.setProgress((int)str);
                             LogUtil.e("---输出seekbar当前进度==="+str);
-                        }else{
-//                    playbackTime.setText("-00:00");
+                            if(str == 1000){//播放完成
+                                playbackVideoView.stopPlayback();
+                                ToastUtil.disPlayOnlyMesShort(PlaybackActivity.this,"播放完成");
+                                playbackProgressbar.setVisibility(View.GONE);
+                                playUtil.onDestroy();
+                            }
                         }
-//                    }
                     }
 
                 }
@@ -238,13 +253,18 @@ public class PlaybackActivity extends BaseActivity {
     private SeekBar.OnSeekBarChangeListener mSeekListener = new SeekBar.OnSeekBarChangeListener() {
 
         public void onStartTrackingTouch(SeekBar bar) {
-
+            playUtil.setSeekBarTouch(true);
+            LogUtil.e("seekbar开始触发");
         }
 
         public void onProgressChanged(SeekBar bar, int progress, boolean fromuser) {
+            LogUtil.e("seekbar正在拖动"+progress+"----"+fromuser);
         }
 
         public void onStopTrackingTouch(SeekBar bar) {
+            playUtil.seekTo(bar.getProgress());
+            playUtil.setSeekBarTouch(false);
+            LogUtil.e("seekbar结束触发");
         }
     };
 }
