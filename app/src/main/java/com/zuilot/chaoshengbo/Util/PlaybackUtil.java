@@ -221,9 +221,11 @@ public class PlaybackUtil implements
 
     private void sendReconnectMessage() {
         showToastTips("正在重连...");
-        currentPosition=mediaPlayer.getCurrentPosition();
-        LogUtil.e("重连过程中输出当前进度："+currentPosition);
-        mediaPlayer=null;
+        if(mediaPlayer != null){
+            currentPosition=mediaPlayer.getCurrentPosition();
+            LogUtil.e("重连过程中输出当前进度："+currentPosition);
+            mediaPlayer=null;
+        }
         Observable.just("正在重连")
                 .timer(5, TimeUnit.SECONDS)
                 .observeOn(AndroidSchedulers.mainThread())

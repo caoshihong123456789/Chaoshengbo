@@ -117,6 +117,7 @@ public class PlaybackActivity extends BaseActivity {
         Glide.with(this).load(userInfo.getUser_avatar()).into(playbackUserImg);
         playbackUserTxt.setText(userInfo.getUser_name());
         playbackCaloriesTxt.setText(userInfo.getCalorie_balance());
+        playbackTitle.setText(liveModel.getTitle());
 
         //设置加载动画
         playbackVideoView.setBufferingIndicator(playbackProgressbar);
