@@ -20,8 +20,8 @@ import com.pili.pldroid.player.widget.PLVideoTextureView;
 import com.pili.pldroid.player.widget.PLVideoView;
 import com.zuilot.chaoshengbo.R;
 import com.zuilot.chaoshengbo.Util.LogUtil;
+import com.zuilot.chaoshengbo.Util.MmediaController2;
 import com.zuilot.chaoshengbo.Util.NetWorkUtil;
-import com.zuilot.chaoshengbo.Util.PlaybackUtil;
 import com.zuilot.chaoshengbo.Util.ToastUtil;
 import com.zuilot.chaoshengbo.activity.BaseActivity;
 import com.zuilot.chaoshengbo.javabean.LiveActivityRecommendedBean;
@@ -77,7 +77,7 @@ public class PlaybackActivity extends BaseActivity {
     private LiveActivityRecommendedBean.myUserInfoBean myUserInfoBean;
     private LiveModel liveModel;
     private UserInfo userInfo;
-    private PlaybackUtil playUtil;
+    private MmediaController2 playUtil;
     private boolean mIsActivityPaused;//当前界面是否还在
     private Subscriber<PLMediaPlayer> getCurrentPositionSubscriber;
 
@@ -95,7 +95,7 @@ public class PlaybackActivity extends BaseActivity {
             liveModel = myUserInfoBean.getLive();
             userInfo = myUserInfoBean;
         }
-        playUtil = new PlaybackUtil();
+        playUtil = new MmediaController2();
         initPlayerView();
 
     }
@@ -173,10 +173,22 @@ public class PlaybackActivity extends BaseActivity {
         getCurrentPositionSubscriber=null;
     }
 
-    public Action1<Long> getSubscriber() {
-        return new Action1<Long>() {
+    public Subscriber<String> getSubscriber() {
+        return new Subscriber<String>() {
             @Override
-            public void call(Long s) {
+            public void onNext(String aLong) {
+                LogUtil.e("onnext:"+aLong);
+//                playbackPause.setImageResource(R.mipmap.playback_start);
+                ToastUtil.disPlayOnlyMesShort(PlaybackActivity.this,aLong);
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                LogUtil.e("onError:"+e.getMessage());
+            }
+
+            @Override
+            public void onCompleted() {
                 Log.e("回放界面重连机制", "---" + liveModel.getPlayback_url());
                 if (mIsActivityPaused && NetWorkUtil.isNetWorkAbailable(PlaybackActivity.this)) {
                     playbackVideoView.setVideoPath(liveModel.getPlayback_url());
@@ -186,6 +198,20 @@ public class PlaybackActivity extends BaseActivity {
                     playbackVideoView.setVideoPath(liveModel.getPlayback_url());
                     playbackVideoView.seekTo(playUtil.getCurrentPosition());
                     playbackVideoView.pause();
+                }
+            }
+
+        };
+    }
+
+    public Action1<Boolean> getPauseObservable(){
+        return new Action1<Boolean>() {
+            @Override
+            public void call(Boolean o) {
+                if(o.booleanValue()){
+                    playbackPause.setImageResource(R.mipmap.playback_pause);
+                }else{
+                    playbackPause.setImageResource(R.mipmap.playback_start);
                 }
             }
         };
@@ -216,6 +242,7 @@ public class PlaybackActivity extends BaseActivity {
                             long str=1000L * mediaPlayer.getCurrentPosition() / mediaPlayer.getDuration();
                             playbackTime.setText("-"+playUtil.generateTime(mediaPlayer.getDuration()- mediaPlayer.getCurrentPosition()));
                             playbackSeekbar.setProgress((int)str);
+                            playUtil.setCurrentPosition(mediaPlayer.getCurrentPosition());
                             LogUtil.e("---输出seekbar当前进度==="+str);
                             if(str == 1000){//播放完成
                                 playbackVideoView.stopPlayback();
@@ -236,7 +263,7 @@ public class PlaybackActivity extends BaseActivity {
     }
 
 
-    @OnClick({R.id.playback_user_layout, R.id.playback_attention, R.id.playback_close, R.id.playback_calories_layout})
+    @OnClick({R.id.playback_user_layout, R.id.playback_attention, R.id.playback_close, R.id.playback_calories_layout, R.id.playback_pause})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.playback_user_layout:
@@ -247,6 +274,9 @@ public class PlaybackActivity extends BaseActivity {
                 this.finish();
                 break;
             case R.id.playback_calories_layout:
+                break;
+            case R.id.playback_pause:
+                playUtil.onPause();
                 break;
         }
     }

@@ -226,10 +226,10 @@ public class PlaybackUtil implements
             LogUtil.e("重连过程中输出当前进度："+currentPosition);
             mediaPlayer=null;
         }
-        Observable.just("正在重连")
-                .timer(5, TimeUnit.SECONDS)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(context.getSubscriber());
+//        Observable.just("正在重连")
+//                .timer(5, TimeUnit.SECONDS)
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(context.getSubscriber());
     }
 
     public String generateTime(long position) {
@@ -249,7 +249,7 @@ public class PlaybackUtil implements
     }
 
     public void onPause() {
-        context.getCurrentSubscriber().unsubscribe();
+
     }
 
     public void onResume() {
