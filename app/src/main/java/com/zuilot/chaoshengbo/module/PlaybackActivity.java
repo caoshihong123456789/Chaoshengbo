@@ -150,7 +150,6 @@ public class PlaybackActivity extends BaseActivity {
     @Override
     public void onPause() {
         super.onPause();
-        playUtil.onPause();
         playbackVideoView.pause();
         mIsActivityPaused = false;
     }
@@ -159,7 +158,6 @@ public class PlaybackActivity extends BaseActivity {
     @Override
     public void onResume() {
         super.onResume();
-        playUtil.onResume();
         playbackVideoView.start();
         mIsActivityPaused = true;
     }

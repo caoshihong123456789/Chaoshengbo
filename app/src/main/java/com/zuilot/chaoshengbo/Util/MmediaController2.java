@@ -104,7 +104,7 @@ public class MmediaController2 implements
     public boolean onError(PLMediaPlayer plMediaPlayer, int errorCode) {
         boolean isNeedReconnect = false;
         LogUtil.e("---" + errorCode);
-        Observable.just(false).subscribe(context.getPauseObservable());
+
         switch (errorCode) {
             case PLMediaPlayer.ERROR_CODE_INVALID_URI:
                 showToastTips("Invalid URL !");
@@ -229,7 +229,7 @@ public class MmediaController2 implements
 
     private int retryCount=0;//等几秒开始重试
     private void sendReconnectMessage() {
-//        showToastTips("正在重连...");
+        Observable.just(false).subscribe(context.getPauseObservable());
         if(mediaPlayer != null){
             currentPosition=mediaPlayer.getCurrentPosition();
             LogUtil.e("重连过程中输出当前进度："+currentPosition);
@@ -307,16 +307,7 @@ public class MmediaController2 implements
 
     }
 
-    public boolean isPlaying(){
-        return mediaPlayer.isPlaying();
-    }
-
-    public void onResume() {
-        LogUtil.e("playbackutil---onResume");
-    }
-
     public void onDestroy() {
-        LogUtil.e("playbackutil---onDestroy");
         context.getCurrentSubscriber().unsubscribe();
         currentPostionObservable=null;
     }
