@@ -18,6 +18,7 @@ import com.zuilot.chaoshengbo.activity.BaseActivity;
 import com.zuilot.chaoshengbo.javabean.BaseResponseBean;
 import com.zuilot.chaoshengbo.model.LiveModel;
 import com.zuilot.chaoshengbo.view.CameraPreviewFrameView;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import rx.android.schedulers.AndroidSchedulers;
@@ -38,9 +39,8 @@ public class LivingActivity extends BaseActivity {
 
     private LiveModel liveModel;//直播信息bean
     private LivingUtil livingUtil;
-    private WatermarkSetting watermarksetting;
-
     protected MediaStreamingManager mMediaStreamingManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,26 +70,27 @@ public class LivingActivity extends BaseActivity {
 
 
     private void initView(){
-        livingUtil=new LivingUtil();
+        livingUtil=new LivingUtil(this);
+//        livingUtil.startStream(this,cameraPreviewAfl,cameraPreviewSurfaceView,liveModel.getStream_json());
         cameraPreviewAfl.setShowMode(AspectFrameLayout.SHOW_MODE.FULL);
         cameraPreviewSurfaceView.setListener(livingUtil);
 
         //水印设置
-        watermarksetting = new WatermarkSetting(this);
-        watermarksetting.setResourceId(R.mipmap.ic_launcher)
+        WatermarkSetting watermarksetting = new WatermarkSetting(this);
+        watermarksetting.setResourceId(R.mipmap.img_weibo)
                 .setAlpha(100)
                 .setSize(WatermarkSetting.WATERMARK_SIZE.MEDIUM)
-                .setCustomPosition(0.5f, 0.5f);
+                .setCustomPosition(0f, 0.5f);
         //水印设置结束
+
 
         mMediaStreamingManager = new MediaStreamingManager(this, cameraPreviewAfl, cameraPreviewSurfaceView,
                 AVCodecType.SW_VIDEO_WITH_SW_AUDIO_CODEC); // sw codec
+
         mMediaStreamingManager.prepare(livingUtil.getCameraStreamingSetting(), livingUtil.getmMicrophoneStreamingSetting(),
-                watermarksetting, livingUtil.getmProfile("{\"id\":\"z1.liaoqiuba.100530340\",\"createdAt\":\"2016-08-08T14:36:33.541+08:00\",\"updatedAt\":\"2016-11-11T09:52:59.092+08:00\",\"expireAt\":\"2017-11-12T09:52:59.092+08:00\",\"title\":\"100530340\",\"hub\":\"liaoqiuba\",\"disabledTill\":0,\"disabled\":false,\"publishKey\":\"7ba28000-92b6-4c78-9a46-01c0b4a70b9a\",\"publishSecurity\":\"static\",\"hosts\":{\"publish\":{\"rtmp\":\"pili-publish.yingboxuncai.com\"},\"live\":{\"hdl\":\"pili-live-hdl.yingboxuncai.com\",\"hls\":\"pili-live-hls.yingboxuncai.com\",\"http\":\"pili-live-hls.yingboxuncai.com\",\"rtmp\":\"pili-live-rtmp.yingboxuncai.com\",\"snapshot\":\"1000160.live1-snapshot.z1.pili.qiniucdn.com\"},\"playback\":{\"hls\":\"1000160.playback1.z1.pili.qiniucdn.com\",\"http\":\"1000160.playback1.z1.pili.qiniucdn.com\"},\"play\":{\"http\":\"pili-live-hls.yingboxuncai.com\",\"rtmp\":\"pili-live-rtmp.yingboxuncai.com\"}}}"));//liveModel.getStream_json()
+                null, livingUtil.getmProfile(liveModel.getStream_json()));//liveModel.getStream_json()
 
         mMediaStreamingManager.setStreamingStateListener(livingUtil);
-
-
     }
 
 
@@ -132,4 +133,7 @@ public class LivingActivity extends BaseActivity {
 
     }
 
+    public void startStream(){
+        mMediaStreamingManager.startStreaming();
+    }
 }

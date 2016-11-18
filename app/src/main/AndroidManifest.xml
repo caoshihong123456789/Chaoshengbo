@@ -72,9 +72,9 @@
             android:theme="@style/livingStyle" />
         <activity
             android:name=".module.LivingActivity"
-            android:theme="@style/livingStyle">
-
-        </activity>
+            android:theme="@style/livingStyle" />
+        <activity android:name=".module.WatchActivity" />
+        <activity android:name=".module.MyFollows"></activity>
     </application>
 
 </manifest>

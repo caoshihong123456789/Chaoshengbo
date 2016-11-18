@@ -88,4 +88,9 @@ public interface BaseApi {
             @Query("horizontal") int horizontal
     );
 
+    Observable<BaseResponseBean<UserInfo>> MyFollowsGetUserInfo(
+            @Query("user_id") String user_id,
+            @Query("pindex") int pindex,
+            @Query("psize") int psize
+    );
 }

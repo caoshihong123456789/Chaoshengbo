@@ -42,6 +42,16 @@ public class PlaybackUtil implements
     //    private static Observable<Boolean> pauseButtonObservable;
     private boolean isSeekBarTouch=false;
 
+    private int playType;//分辨是直播还是回放
+
+    //设置是直播还是回放，如果是true则是直播 如果是false则是回放
+    public void setPlayType(boolean playType) {
+        if(playType){
+            this.playType = 1;
+        }else{
+            this.playType = 0;
+        }
+    }
 
     public void setSeekBarTouch(boolean seekBarTouch) {
         isSeekBarTouch = seekBarTouch;

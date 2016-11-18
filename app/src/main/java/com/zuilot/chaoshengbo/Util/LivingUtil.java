@@ -15,11 +15,13 @@ import com.qiniu.pili.droid.streaming.MicrophoneStreamingSetting;
 import com.qiniu.pili.droid.streaming.StreamingProfile;
 import com.qiniu.pili.droid.streaming.StreamingState;
 import com.qiniu.pili.droid.streaming.StreamingStateChangedListener;
+import com.zuilot.chaoshengbo.module.LivingActivity;
 import com.zuilot.chaoshengbo.view.CameraPreviewFrameView;
+
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.net.InetAddress;
-import java.net.URISyntaxException;
 
 /**
  * Created by caoshihong on 2016/11/17.
@@ -34,6 +36,11 @@ public class LivingUtil implements CameraPreviewFrameView.Listener,
     private CameraStreamingSetting cameraStreamingSetting;//摄像头参数设置类
     private MicrophoneStreamingSetting mMicrophoneStreamingSetting;//麦克风参数设置类
     protected StreamingProfile mProfile;
+    private LivingActivity context;
+
+    public LivingUtil(LivingActivity context) {
+        this.context = context;
+    }
 
     /**
      * 设置摄像头
@@ -78,12 +85,26 @@ public class LivingUtil implements CameraPreviewFrameView.Listener,
      */
     public StreamingProfile getmProfile(String streamJson) {
         if(mProfile == null){
+            JSONObject mJSONObject=null;
             mProfile = new StreamingProfile();
-            try {
+           /* try {
                 mProfile.setPublishUrl(streamJson);
             } catch (URISyntaxException e) {
                 e.printStackTrace();
+            }*/
+            if (streamJson==null || streamJson.isEmpty()) {
+                LogUtil.e("Invalid Publish Url");
+            } else {
+                try {
+                     mJSONObject = new JSONObject(streamJson);
+                    StreamingProfile.Stream stream = new StreamingProfile.Stream(mJSONObject);
+                    mProfile.setStream(stream);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
+
+            mProfile.setStream( new StreamingProfile.Stream(mJSONObject));
             mProfile.setVideoQuality(StreamingProfile.VIDEO_QUALITY_MEDIUM2)
                     .setAudioQuality(StreamingProfile.AUDIO_QUALITY_MEDIUM2)
 //                .setPreferredVideoEncodingSize(960, 544)
@@ -159,12 +180,15 @@ public class LivingUtil implements CameraPreviewFrameView.Listener,
             case PREPARING:
                 break;
             case READY:
+                context.startStream();
                 break;
             case CONNECTING:
                 break;
             case STREAMING:
                 break;
             case SHUTDOWN:
+                //需要将横竖屏切换设置成不可横竖屏切换
+                context.startStream();
                 break;
             case IOERROR:
                 break;
@@ -194,4 +218,7 @@ public class LivingUtil implements CameraPreviewFrameView.Listener,
     * 视频状态监听
     * 结束
     * */
+
+
+
 }
