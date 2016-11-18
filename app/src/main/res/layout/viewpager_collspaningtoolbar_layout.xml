@@ -46,13 +46,15 @@
                 android:textColor="@color/black_bg"
                 android:textSize="18sp" />
 
-            <ImageView
+            <TextView
                 android:id="@+id/carousel_colltoobar_menu"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_gravity="center_vertical|right"
+                android:gravity="center"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
+                android:textColor="@color/black_bg"
                 tools:src="@mipmap/mores" />
 
         </android.support.v7.widget.Toolbar>

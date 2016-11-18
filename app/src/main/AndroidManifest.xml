@@ -20,6 +20,13 @@
     <uses-permission android:name="android.permission.USE_CREDENTIALS" />
     <uses-permission android:name="android.permission.MANAGE_ACCOUNTS" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+    <uses-feature
+        android:glEsVersion="0x00020000"
+        android:required="true" />
 
     <application
         android:name=".activity.MApplication"
@@ -62,7 +69,12 @@
         <activity android:name=".activity.WebViewActivity" />
         <activity
             android:name=".module.PlaybackActivity"
-            android:theme="@style/livingStyle"></activity>
+            android:theme="@style/livingStyle" />
+        <activity
+            android:name=".module.LivingActivity"
+            android:theme="@style/livingStyle">
+
+        </activity>
     </application>
 
 </manifest>

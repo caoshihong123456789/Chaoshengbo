@@ -11,7 +11,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.zuilot.chaoshengbo.NetUtil.BaseApi;
@@ -31,6 +30,7 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Func3;
@@ -48,7 +48,7 @@ public class LiveActivity extends BaseFragment {
     @Bind(R.id.carousel_colltoobar_title)
     TextView carouselColltoobarTitle;
     @Bind(R.id.carousel_colltoobar_menu)
-    ImageView carouselColltoobarMenu;
+    TextView carouselColltoobarMenu;
     @Bind(R.id.carousel_colltoobar_layout)
     Toolbar carouselColltoobarLayout;
     @Bind(R.id.carousel_colltoobar)
@@ -88,9 +88,11 @@ public class LiveActivity extends BaseFragment {
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);//返回键
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(false);
         carouselColltoobarTitle.setText("现场");
+        carouselColltoobarMenu.setText("开始直播");
 
         //设置工具栏标题
         carouselColltoobar.setTitleEnabled(false);
+
 
         carcouselAdapter = new CarouselAdapter();
         carouselColltoobarViewpager.setAdapter(carcouselAdapter);
@@ -145,4 +147,12 @@ public class LiveActivity extends BaseFragment {
     }
 
 
+    @OnClick(R.id.carousel_colltoobar_menu)
+    public void onClick(View view){
+        switch (view.getId()){
+            case R.id.carousel_colltoobar_menu:
+                LivingActivity.startLiving(LiveActivity.this.getActivity(),1,0);
+                break;
+        }
+    }
 }

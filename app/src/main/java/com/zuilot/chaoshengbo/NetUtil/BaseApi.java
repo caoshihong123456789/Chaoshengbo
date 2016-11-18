@@ -7,12 +7,14 @@ import com.zuilot.chaoshengbo.javabean.LiveActivityLivesBean;
 import com.zuilot.chaoshengbo.javabean.LiveActivityRecommendedBean;
 import com.zuilot.chaoshengbo.model.CarouselModel;
 import com.zuilot.chaoshengbo.model.FeatureModel;
+import com.zuilot.chaoshengbo.model.LiveModel;
 import com.zuilot.chaoshengbo.model.TopicDetailModel;
 import com.zuilot.chaoshengbo.model.UserInfo;
 
 import java.util.List;
 
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Query;
 import rx.Observable;
 
@@ -78,5 +80,12 @@ public interface BaseApi {
             @Query("user_id") String user_id
     );
 
+
+    @POST(GetString.LivingLiveModelGet_URL)
+    Observable<BaseResponseBean<LiveModel>> LivingActivityGetLiveModel(
+            @Query("user_id") String user_id,
+            @Query("title") String title,
+            @Query("horizontal") int horizontal
+    );
 
 }

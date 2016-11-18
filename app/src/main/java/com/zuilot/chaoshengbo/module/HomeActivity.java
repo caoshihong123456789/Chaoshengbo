@@ -11,7 +11,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.zuilot.chaoshengbo.NetUtil.BaseApi;
@@ -41,7 +40,7 @@ public class HomeActivity extends BaseFragment {
     @Bind(R.id.carousel_colltoobar_title)
     TextView carouselColltoobarTitle;
     @Bind(R.id.carousel_colltoobar_menu)
-    ImageView carouselColltoobarMenu;
+    TextView carouselColltoobarMenu;
     @Bind(R.id.carousel_colltoobar_layout)
     Toolbar carouselColltoobarLayout;
     @Bind(R.id.carousel_colltoobar)

@@ -20,8 +20,8 @@ import com.pili.pldroid.player.widget.PLVideoTextureView;
 import com.pili.pldroid.player.widget.PLVideoView;
 import com.zuilot.chaoshengbo.R;
 import com.zuilot.chaoshengbo.Util.LogUtil;
-import com.zuilot.chaoshengbo.Util.MmediaController2;
 import com.zuilot.chaoshengbo.Util.NetWorkUtil;
+import com.zuilot.chaoshengbo.Util.PlaybackUtil;
 import com.zuilot.chaoshengbo.Util.ToastUtil;
 import com.zuilot.chaoshengbo.activity.BaseActivity;
 import com.zuilot.chaoshengbo.javabean.LiveActivityRecommendedBean;
@@ -77,7 +77,7 @@ public class PlaybackActivity extends BaseActivity {
     private LiveActivityRecommendedBean.myUserInfoBean myUserInfoBean;
     private LiveModel liveModel;
     private UserInfo userInfo;
-    private MmediaController2 playUtil;
+    private PlaybackUtil playUtil;
     private boolean mIsActivityPaused;//当前界面是否还在
     private Subscriber<PLMediaPlayer> getCurrentPositionSubscriber;
 
@@ -95,7 +95,7 @@ public class PlaybackActivity extends BaseActivity {
             liveModel = myUserInfoBean.getLive();
             userInfo = myUserInfoBean;
         }
-        playUtil = new MmediaController2();
+        playUtil = new PlaybackUtil();
         initPlayerView();
 
     }

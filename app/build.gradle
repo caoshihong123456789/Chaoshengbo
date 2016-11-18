@@ -81,7 +81,7 @@ dependencies {
     compile 'com.umeng.analytics:analytics:latest.integration'
 
     /*七牛播放器*/
-    compile 'com.qiniu.pili:pili-android-qos:0.8.+'
+    compile 'com.qiniu.pili:pili-android-qos:0.8.13'
     compile 'com.qiniu:happy-dns:0.2.+'
     /*七牛播放器*/
 }

@@ -38,6 +38,8 @@ public class GetString {
     public static final String LiveActivity_GETRecommend_URL="/chat/index/recommendanchors";//现场页获得推荐主播列表
     public static final String UserCenterActivity_getUserInfo_URL="/chat/Qiniu/getuser";//我的页面获得个人信息
 
+    public static final String LivingLiveModelGet_URL="/chat/Qiniu/livenew";//获取直播信息bean
+
 
 
 }

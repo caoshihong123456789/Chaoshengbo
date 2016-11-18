@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_living"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.zuilot.chaoshengbo.module.LivingActivity">
+
+
+    <com.qiniu.pili.droid.streaming.widget.AspectFrameLayout
+        android:id="@+id/cameraPreview_afl"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true">
+
+        <com.zuilot.chaoshengbo.view.CameraPreviewFrameView
+            android:id="@+id/cameraPreview_surfaceView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center" />
+
+        <!--
+        手指点击屏幕出发屏幕方框显示，暂时还用不到，待基本功能完成后再添加此功能
+            <include layout="@layout/focus_indicator" />-->
+
+    </com.qiniu.pili.droid.streaming.widget.AspectFrameLayout>
+</RelativeLayout>

@@ -17,20 +17,15 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
-import com.zuilot.chaoshengbo.NetUtil.BaseApi;
-import com.zuilot.chaoshengbo.NetUtil.BaseSubscriber;
-import com.zuilot.chaoshengbo.NetUtil.NetUtil;
 import com.zuilot.chaoshengbo.R;
 import com.zuilot.chaoshengbo.Util.BitmapBlurUtil;
 import com.zuilot.chaoshengbo.Util.GlideCircleTransform;
 import com.zuilot.chaoshengbo.activity.BaseFragment;
-import com.zuilot.chaoshengbo.javabean.BaseResponseBean;
+import com.zuilot.chaoshengbo.activity.MApplication;
 import com.zuilot.chaoshengbo.model.UserInfo;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
 
 /**
  * Created by caoshihong on 2016/11/3.
@@ -94,7 +89,9 @@ public class UserCenterActivity extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_usercenter, null);
         ButterKnife.bind(this, view);
-        initData();
+        if(MApplication.userInfo != null){
+            initView(MApplication.userInfo);//根据用户信息为view赋值
+        }
         return view;
     }
 
@@ -105,33 +102,6 @@ public class UserCenterActivity extends BaseFragment {
         ButterKnife.unbind(this);
     }
 
-    private void initData() {
-        NetUtil.GetApi().UserCenterActivityLives(BaseApi.user_id)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
-                .subscribe(new BaseSubscriber<BaseResponseBean<UserInfo>>(getActivity()) {
-                    @Override
-                    public void onNext(BaseResponseBean<UserInfo> userInfoBaseResponseBean) {
-                        super.onNext(userInfoBaseResponseBean);
-                        initView(userInfoBaseResponseBean.getData());
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        super.onError(e);
-                    }
-
-                    @Override
-                    public void onCompleted() {
-                        super.onCompleted();
-                    }
-
-                    @Override
-                    public void onStart() {
-                        super.onStart();
-                    }
-                });
-    }
 
     private void initView(UserInfo info) {
         Glide.with(this.getActivity()).load(info.getUser_avatar())
