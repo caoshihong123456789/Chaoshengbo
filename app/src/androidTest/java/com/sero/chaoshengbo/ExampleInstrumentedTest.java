@@ -1,4 +1,4 @@
-package com.zuilot.chaoshengbo;
+package com.sero.chaoshengbo;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

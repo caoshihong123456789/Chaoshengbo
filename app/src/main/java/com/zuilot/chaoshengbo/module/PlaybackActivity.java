@@ -124,15 +124,15 @@ public class PlaybackActivity extends BaseActivity {
         //设置播放器参数
         playbackVideoView.setAVOptions(playUtil.getAVOptions(this));
 
-        if(liveModel.getType().equals("1")){//直播
-            playUtil.setPlayType(true);
-            //设置播放地址
-            playbackVideoView.setVideoPath(liveModel.getRtmp_publish_url());
-        }else{//回放
-            playUtil.setPlayType(false);
+//        if(liveModel.getType().equals("1")){//直播
+//            playUtil.setPlayType(true);
+//            //设置播放地址
+//            playbackVideoView.setVideoPath(liveModel.getRtmp_publish_url());
+//        }else{//回放
+//            playUtil.setPlayType(false);
             //设置播放地址
             playbackVideoView.setVideoPath(liveModel.getPlayback_url());
-        }
+//        }
 
         if (liveModel.getHorizontal().equals("1")) {//pc直播
             //设置预览模式

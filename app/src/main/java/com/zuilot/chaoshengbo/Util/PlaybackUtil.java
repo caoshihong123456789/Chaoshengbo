@@ -7,7 +7,6 @@ import com.pili.pldroid.player.AVOptions;
 import com.pili.pldroid.player.PLMediaPlayer;
 import com.zuilot.chaoshengbo.module.PlaybackActivity;
 
-import java.net.UnknownHostException;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
@@ -237,7 +236,6 @@ public class PlaybackUtil implements
                 });
     }
 
-    private int retryCount=0;//等几秒开始重试
     private void sendReconnectMessage() {
         Observable.just(false).subscribe(context.getPauseObservable());
         if(mediaPlayer != null){
@@ -257,37 +255,6 @@ public class PlaybackUtil implements
                 .subscribe(context.getSubscriber());
     }
 
-    //现在没有用，不会用retrywhen
-    private Observable retryObservable;
-    private Observable getRetryObservable(){
-        if(retryObservable == null){
-            retryObservable=Observable.just(1L)
-                    .retryWhen(new Func1<Observable<? extends Throwable>, Observable<?>>() {
-                        @Override
-                        public Observable<?> call(Observable<? extends Throwable> observable) {
-
-                            return observable.flatMap(new Func1<Throwable, Observable<?>>() {
-                                @Override
-                                public Observable<?> call(Throwable throwable) {
-                                    if(throwable instanceof UnknownHostException){
-                                        LogUtil.e("---retryWhen+netError:"+retryCount);
-                                        Observable.error(throwable);
-                                    }
-                                    LogUtil.e("retryWhen----:"+retryCount);
-                                    if(retryCount++ >= 5){
-                                        return Observable.timer(5, TimeUnit.SECONDS);
-                                    }else{
-                                        return Observable.error(throwable);
-                                    }
-
-                                }
-                            });
-                        }
-                    });
-            retryObservable.subscribe(context.getSubscriber());
-        }
-        return retryObservable;
-    }
 
     public String generateTime(long position) {
         int totalSeconds = (int) (position / 1000);
@@ -307,17 +274,19 @@ public class PlaybackUtil implements
 
     public void onPause() {
         LogUtil.e("playbackutil---onpaush");
-        if(mediaPlayer.isPlaying()){
-            Observable.just(false).subscribe(context.getPauseObservable());
-            mediaPlayer.pause();
-        }else{
-            Observable.just(true).subscribe(context.getPauseObservable());
-            mediaPlayer.start();
+        if(mediaPlayer !=null){
+            if(mediaPlayer.isPlaying()){
+                Observable.just(false).subscribe(context.getPauseObservable());
+                mediaPlayer.pause();
+            }else{
+                Observable.just(true).subscribe(context.getPauseObservable());
+                mediaPlayer.start();
+            }
         }
-
     }
 
     public void onDestroy() {
+        context.getSubscriber().unsubscribe();
         context.getCurrentSubscriber().unsubscribe();
         currentPostionObservable=null;
     }
